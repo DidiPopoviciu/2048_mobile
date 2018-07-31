@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
 //        requestWindowFeature(Window.FEATURE_ACTION_BAR)
 //        actionBar.hide()
+
         super.onCreate(savedInstanceState)
         window.requestFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -42,9 +43,12 @@ class MainActivity : AppCompatActivity() {
         imageView4.layoutParams.width = logo_width
         imageView4.layoutParams.height = (281 * logo_width)/720
 
-        imageView5.setOnClickListener {
+
+        startLevel.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
-            startActivity(intent);
+            startActivity(intent)
         }
+
+
     }
 }
