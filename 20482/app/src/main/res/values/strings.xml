@@ -5,4 +5,8 @@
     <string name="restoreVitalityButton">Restore Vitality</string>
     <string name="skipVitality">Not now</string>
     <string name="warningExhaustion">Looks like Endy is exhausted...</string>
+    <string name="highestScoreTitle">Your Highest Score</string>
+    <string name="highestScoreNumber">8192</string>
+    <string name="currentScoreNumber">2048</string>
+    <string name="currentScoreTitle">Current Score</string>
 </resources>
