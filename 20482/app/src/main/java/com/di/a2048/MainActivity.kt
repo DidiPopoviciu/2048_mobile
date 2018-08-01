@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
             val mAlertDialog = mBuilder.show()
 
-            mDialogView.vitalityDialog.setOnClickListener{
+            mDialogView.restoreVitality.setOnClickListener{
                 mAlertDialog.dismiss()
             }
 

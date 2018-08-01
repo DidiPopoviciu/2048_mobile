@@ -11,12 +11,17 @@ import android.text.method.Touch.onTouchEvent
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import kotlinx.android.synthetic.main.activity_game.*
 
 
 class GameActivity() : AppCompatActivity()
     {
         private var x1 = 0f
         private var y1 = 0f
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +32,27 @@ class GameActivity() : AppCompatActivity()
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
+
+        var listener = View.OnTouchListener(function = {view, motionEvent -> if (motionEvent.action == MotionEvent.ACTION_MOVE) {
+            view.y = motionEvent.rawY - view.height
+            view.x = motionEvent.rawX - view.width/2
+
+        }
+            true
+
+        })
+
+        endyPowerUp.setOnTouchListener(listener)
+
+//        var listenerUp = View.OnTouchListener(function = {view, motionEvent -> if (motionEvent.action == MotionEvent.ACTION_UP) {
+//            view.visibility = View.INVISIBLE
+//
+//        }
+//            true
+//
+//        })
+//
+//        endyPowerUp.setOnTouchListener(listenerUp)
     }
 
     // onTouchEvent () method gets called when User performs any touch event on screen
@@ -77,6 +103,9 @@ class GameActivity() : AppCompatActivity()
     }
 
 
+    }
+
+
 //        override fun onDown(event: MotionEvent): Boolean {
 //        Log.d("DEBUG", "Action was UP")
 //        return true
@@ -108,4 +137,3 @@ class GameActivity() : AppCompatActivity()
 //            }
 //        }
 
-}
