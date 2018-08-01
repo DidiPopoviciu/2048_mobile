@@ -3,10 +3,13 @@ package com.di.a2048
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.Window
 import android.view.WindowManager
 import android.util.DisplayMetrics
+import android.view.LayoutInflater
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.custom_dialog.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 //            imageView4.layoutParams.height = 150
 
         var logo_width = 0
+
         logo_width = (37 * height_of_screen)/100
         textV.text = logo_width.toString()
         imageView4.layoutParams.width = logo_width
@@ -49,6 +53,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        openDialog.setOnClickListener{
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
+
+            val mBuilder = AlertDialog.Builder(this)
+                    .setView(mDialogView)
+
+            val mAlertDialog = mBuilder.show()
+
+            mDialogView.vitalityDialog.setOnClickListener{
+                mAlertDialog.dismiss()
+            }
+
+            mDialogView.skipVitality.setOnClickListener{
+                mAlertDialog.dismiss()
+            }
+
+        }
 
     }
 }

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">2048</string>
-
+    <string name="vitalityExplanation">In order to be able to help you, Endy needs vitality which can be earned by watching a video</string>
+    <string name="VitalityTitle">Endy needs your attention!</string>
+    <string name="restoreVitalityButton">Restore Vitality</string>
+    <string name="skipVitality">Not now</string>
+    <string name="warningExhaustion">Looks like Endy is exhausted...</string>
 </resources>
