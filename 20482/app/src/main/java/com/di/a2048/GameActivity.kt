@@ -1,6 +1,7 @@
 package com.di.a2048
 
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -43,6 +44,22 @@ class GameActivity() : AppCompatActivity()
         })
 
         endyPowerUp.setOnTouchListener(listener)
+
+        var listenerChangeColor = View.OnTouchListener(function = {view, motionEvent -> if(motionEvent.action == MotionEvent.ACTION_DOWN) {
+            square1b1.setTextColor(-0xffff01)
+        }
+            true
+        })
+
+        square1b1.setOnTouchListener(listenerChangeColor)
+
+        closeGame.setOnClickListener{
+            val intent = Intent(this, GameActivity::class.java)
+            super.finish()
+
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+        }
 
 //        var listenerUp = View.OnTouchListener(function = {view, motionEvent -> if (motionEvent.action == MotionEvent.ACTION_UP) {
 //            view.visibility = View.INVISIBLE
