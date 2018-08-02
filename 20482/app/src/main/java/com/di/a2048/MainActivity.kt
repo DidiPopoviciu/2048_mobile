@@ -8,6 +8,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
+import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 
@@ -51,7 +52,11 @@ class MainActivity : AppCompatActivity() {
         startLevel.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
+
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
+
+
 
         openDialog.setOnClickListener{
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
