@@ -1,9 +1,12 @@
 package com.di.a2048
 
 import android.content.Intent
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -16,6 +19,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class GameActivity() : AppCompatActivity()
@@ -23,6 +27,8 @@ class GameActivity() : AppCompatActivity()
         private var x1 = 0f
         private var y1 = 0f
 
+        var globalX = 0
+        var globalY = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +40,49 @@ class GameActivity() : AppCompatActivity()
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
 
+        var countHelper = 1
+
+
+
         var listener = View.OnTouchListener(function = {view, motionEvent -> if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-            view.y = motionEvent.rawY - view.height
+            view.y = motionEvent.rawY - view.height/2
             view.x = motionEvent.rawX - view.width/2
+
+            while (countHelper == 1) {
+                countHelper += 1
+
+                globalX = endyPowerUp.x.toInt()
+                globalY = endyPowerUp.y.toInt()
+
+                Toast.makeText(this, "x = $globalX, y = $globalY", Toast.LENGTH_SHORT).show();
+            }
+
+            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_powerup)
 
         }
             true
 
         })
 
-        endyPowerUp.setOnTouchListener(listener)
+           endyPowerUp.setOnTouchListener(listener)
+
+
+
+        var returnEndy = View.OnTouchListener(function = {view, motionEvent -> if (motionEvent.action == MotionEvent.ACTION_UP) {
+
+            Toast.makeText(this, "Endy should return to $globalX and $globalY", Toast.LENGTH_SHORT).show();
+
+            endyPowerUp.x = globalX.toFloat()
+            endyPowerUp.y = globalY.toFloat()
+
+        }
+            true
+        })
+
+        restartGame.setOnTouchListener(returnEndy)
+
+
+
 
         var listenerChangeColor = View.OnTouchListener(function = {view, motionEvent -> if(motionEvent.action == MotionEvent.ACTION_DOWN) {
             square1b1.setTextColor(-0xffff01)
@@ -71,6 +110,11 @@ class GameActivity() : AppCompatActivity()
 //
 //        endyPowerUp.setOnTouchListener(listenerUp)
     }
+
+        fun saveEndyPosition() {
+            globalX = endyPowerUp.x.toInt()
+            globalY = endyPowerUp.y.toInt()
+        }
 
     // onTouchEvent () method gets called when User performs any touch event on screen
     // Method to handle touch event like left to right swap and right to left swap

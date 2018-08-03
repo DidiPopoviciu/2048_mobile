@@ -9,4 +9,5 @@
     <string name="highestScoreNumber">8192</string>
     <string name="currentScoreNumber">2048</string>
     <string name="currentScoreTitle">Current Score</string>
+    <string name="maximumVitality">Endy has all the energy in the world!</string>
 </resources>
