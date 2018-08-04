@@ -102,7 +102,8 @@ class MainActivity : AppCompatActivity() {
                         Handler().postDelayed({
                             endyMessage.visibility = View.INVISIBLE
                         }, 1000)
-                    } else {
+                    }
+                    else {
                         endyMessage.visibility = View.VISIBLE
                         endyMessage.text = "+1 vitality"
                         Handler().postDelayed({
@@ -111,45 +112,45 @@ class MainActivity : AppCompatActivity() {
                     }
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_first_step)
                     }
-                in 4..9 -> {
+                in 4..8 -> {
                     countVitality += 1
                     vitalityBadge2.text = countVitality.toString()
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_second_step)
 
-
-
-                    if (countVitality == 10)
-                    {
+                    if (endyMessage.visibility == View.VISIBLE) {
+                        endyMessage.text = "+1 vitality"
+                        Handler().postDelayed({
+                            endyMessage.visibility = View.INVISIBLE
+                        }, 1000)
+                    }
+                    else {
+                        endyMessage.visibility = View.VISIBLE
+                        endyMessage.text = "+1 vitality"
+                        Handler().postDelayed({
+                            endyMessage.visibility = View.INVISIBLE
+                        }, 1000)
+                    }
+                }
+                9 -> {
 //                        Toast.makeText(this, "Case 5-9, countVit=10", Toast.LENGTH_SHORT).show();
-                        endyMessage.text = "Endy has all the energy in the world!"
-                        if (endyMessage.visibility == View.INVISIBLE){
-                            endyMessage.visibility = View.VISIBLE
-                            Handler().postDelayed({
-                                endyMessage.visibility = View.INVISIBLE
-                            }, 5000)
-                        }else {endyMessage.visibility = View.INVISIBLE}
-                        openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_max)
-                        addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality_inactive)
-
+                    countVitality += 1
+                    vitalityBadge2.text = countVitality.toString()
+                    endyMessage.text = "Endy has all the energy in the world!"
+                    if (endyMessage.visibility == View.INVISIBLE){
+                        endyMessage.visibility = View.VISIBLE
                         Handler().postDelayed({
                             endyMessage.visibility = View.INVISIBLE
                         }, 5000)
-                    } else {
-                        if (endyMessage.visibility == View.VISIBLE){
-                            endyMessage.text = "+1 vitality"
-                            Handler().postDelayed({
-                                endyMessage.visibility = View.INVISIBLE
-                            }, 1000)
-                        } else {
-                            endyMessage.visibility = View.VISIBLE
-                            endyMessage.text = "+1 vitality"
-                            Handler().postDelayed({
-                                endyMessage.visibility = View.INVISIBLE
-                            }, 1000)
-                        }
                     }
-                }
+                    else {endyMessage.visibility = View.INVISIBLE}
+                    openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_max)
+                    addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality_inactive)
 
+                    Handler().postDelayed({
+                        endyMessage.visibility = View.INVISIBLE
+                    }, 5000)
+
+                }
                 else -> {
 //                    Toast.makeText(this, "In the else case", Toast.LENGTH_SHORT).show();
                     endyMessage.text = "Endy cannot store more vitality"
@@ -162,7 +163,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-
         }
             true
         })

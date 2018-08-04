@@ -30,6 +30,9 @@ class GameActivity() : AppCompatActivity()
         var globalX = 0
         var globalY = 0
 
+        var endy_x = 0
+        var endy_y = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,17 +43,13 @@ class GameActivity() : AppCompatActivity()
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
 
-        var countHelper = 1
-
-
+        var first = true
 
         var listener = View.OnTouchListener(function = {view, motionEvent -> if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-            view.y = motionEvent.rawY - view.height/2
+            view.y = motionEvent.rawY - view.height
             view.x = motionEvent.rawX - view.width/2
-
-            while (countHelper == 1) {
-                countHelper += 1
-
+            if (first){
+                first = false
                 globalX = endyPowerUp.x.toInt()
                 globalY = endyPowerUp.y.toInt()
 
@@ -111,10 +110,20 @@ class GameActivity() : AppCompatActivity()
 //        endyPowerUp.setOnTouchListener(listenerUp)
     }
 
-        fun saveEndyPosition() {
-            globalX = endyPowerUp.x.toInt()
-            globalY = endyPowerUp.y.toInt()
-        }
+    override fun onStart() {
+        super.onStart()
+
+        endy_x = endyPowerUp.x.toInt()
+        endy_y = endyPowerUp.y.toInt()
+
+        Toast.makeText(this, "endy_x = $endy_x & endy_y = $endy_y", Toast.LENGTH_SHORT).show();
+
+    }
+
+    fun saveEndyPosition() {
+        globalX = endyPowerUp.x.toInt()
+        globalY = endyPowerUp.y.toInt()
+    }
 
     // onTouchEvent () method gets called when User performs any touch event on screen
     // Method to handle touch event like left to right swap and right to left swap
@@ -122,10 +131,10 @@ class GameActivity() : AppCompatActivity()
 
         when (event.action) {
         // when user first touches the screen we get x and y coordinate
-            MotionEvent.ACTION_DOWN -> {
-                x1 = event.x
-                y1 = event.y
-            }
+//            MotionEvent.ACTION_DOWN -> {
+//                x1 = event.x
+//                y1 = event.y
+//            }
             MotionEvent.ACTION_UP -> {
                 val x2 = event.x
                 val y2 = event.y
@@ -166,35 +175,4 @@ class GameActivity() : AppCompatActivity()
 
     }
 
-
-//        override fun onDown(event: MotionEvent): Boolean {
-//        Log.d("DEBUG", "Action was UP")
-//        return true
-//    }
-
-//    @Override
-//    public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float X, float Y)
-//        {
-//            if (motionEvent1.getY() - motionEvent2.getY() > 50) {
-//                Toast.makeText(MainActivity.this, "You Swiped up!", Toast.LENGTH_LONG).show();
-//                return true;
-//            }
-//
-//            if (motionEvent2.getY() - motionEvent1.getY() > 50) {
-//                Toast.makeText(MainActivity.this, "You Swiped Down!", Toast.LENGTH_LONG).show();
-//                return true;
-//            }
-//
-//            if (motionEvent1.getX() - motionEvent2.getX() > 50) {
-//                Toast.makeText(MainActivity.this, "You Swiped Left!", Toast.LENGTH_LONG).show();
-//                return true;
-//            }
-//
-//            if (motionEvent2.getX() - motionEvent1.getX() > 50) {
-//                Toast.makeText(MainActivity.this, "You Swiped Right!", Toast.LENGTH_LONG).show();
-//                return true;
-//            } else {
-//                return true;
-//            }
-//        }
 
