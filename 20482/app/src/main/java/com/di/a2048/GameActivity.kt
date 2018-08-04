@@ -35,8 +35,6 @@ class GameActivity() : AppCompatActivity()
 
         var textViewsMatrix = arrayOf<Array<TextView>>()
 
-        var endy_x = 0
-        var endy_y = 0
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -53,10 +51,8 @@ class GameActivity() : AppCompatActivity()
                     arrayOf(element9, element10, element11, element12),
                     arrayOf(element13, element14, element15, element16)
             )
-            initMatrix(textViewsMatrix, valuesMatrix, this)
 
-            generateNewElement(valuesMatrix, textViewsMatrix, this)
-            generateNewElement(valuesMatrix, textViewsMatrix, this)
+            startNewGame()
 
             var listener = View.OnTouchListener(function = { view, motionEvent ->
 
@@ -75,18 +71,15 @@ class GameActivity() : AppCompatActivity()
             var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_UP) {
 
+                    startNewGame()
+                    val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
+                    animationEndyX.duration = 500
 
+                    animationEndyX.start()
 
-                initMatrix(textViewsMatrix, valuesMatrix, this)
-
-                val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
-                animationEndyX.duration = 500
-
-                animationEndyX.start()
-
-                val animationEndyY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
-                animationEndyY.duration = 500
-                animationEndyY.start()
+                    val animationEndyY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
+                    animationEndyY.duration = 500
+                    animationEndyY.start()
 
                 }
                 true
@@ -270,6 +263,11 @@ class GameActivity() : AppCompatActivity()
             view.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
         }
 
+        private fun startNewGame(){
+            initMatrix(textViewsMatrix, valuesMatrix, this)
+            generateNewElement(valuesMatrix, textViewsMatrix, this)
+            generateNewElement(valuesMatrix, textViewsMatrix, this)
+        }
     }
 
 
