@@ -113,7 +113,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <TextView
-            android:id="@+id/square1b1"
+            android:id="@+id/element1"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="0"
@@ -125,7 +125,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="8"
+             
             android:textAlignment="gravity"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
@@ -142,7 +142,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button2"
+            android:id="@+id/element2"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="1"
@@ -156,13 +156,13 @@
             android:includeFontPadding="false"
             android:paddingBottom="0dp"
             android:paddingTop="0dp"
-            android:text="8"
+             
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button2-1"
+            android:id="@+id/element2-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="1"
@@ -173,7 +173,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button3"
+            android:id="@+id/element3"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="2"
@@ -185,13 +185,12 @@
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="8"
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button3-1"
+            android:id="@+id/element3-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="2"
@@ -202,7 +201,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button4"
+            android:id="@+id/element4"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="3"
@@ -214,13 +213,13 @@
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="8"
+             
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button4-1"
+            android:id="@+id/element4-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="3"
@@ -231,7 +230,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button5"
+            android:id="@+id/element5"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="0"
@@ -242,12 +241,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button5-1"
+            android:id="@+id/element5-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="0"
@@ -258,7 +257,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button6"
+            android:id="@+id/element6"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="1"
@@ -269,13 +268,13 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button6-1"
+            android:id="@+id/element6-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="1"
@@ -286,7 +285,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button7"
+            android:id="@+id/element7"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="2"
@@ -297,12 +296,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button7-1"
+            android:id="@+id/element7-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="2"
@@ -313,7 +312,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button8"
+            android:id="@+id/element8"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="3"
@@ -324,12 +323,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button8-1"
+            android:id="@+id/element8-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="3"
@@ -340,7 +339,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button9"
+            android:id="@+id/element9"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="0"
@@ -351,12 +350,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button9-1"
+            android:id="@+id/element9-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="0"
@@ -367,7 +366,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button10"
+            android:id="@+id/element10"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="1"
@@ -378,12 +377,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button10-1"
+            android:id="@+id/element10-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="1"
@@ -394,7 +393,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button11"
+            android:id="@+id/element11"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="2"
@@ -405,12 +404,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button11-1"
+            android:id="@+id/element11-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="2"
@@ -421,7 +420,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button12"
+            android:id="@+id/element12"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="3"
@@ -432,12 +431,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button12-1"
+            android:id="@+id/element12-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="3"
@@ -448,7 +447,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button13"
+            android:id="@+id/element13"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="0"
@@ -459,12 +458,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button13-1"
+            android:id="@+id/element13-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="0"
@@ -475,7 +474,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button14"
+            android:id="@+id/element14"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="1"
@@ -486,12 +485,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button14-1"
+            android:id="@+id/element14-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="1"
@@ -502,7 +501,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button15"
+            android:id="@+id/element15"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="2"
@@ -513,12 +512,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button15-1"
+            android:id="@+id/element15-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="2"
@@ -529,7 +528,7 @@
             android:background="@drawable/ic_ic_face_0_v3" />
 
         <TextView
-            android:id="@+id/button16"
+            android:id="@+id/element16"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_column="3"
@@ -540,12 +539,12 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-            android:text="8"
+             
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/button16-1"
+            android:id="@+id/element16-1"
             android:layout_width="75dp"
             android:layout_height="10dp"
             android:layout_column="3"
