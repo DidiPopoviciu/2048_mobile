@@ -81,6 +81,7 @@
 
     <Button
         android:id="@+id/endyPowerUp"
+        android:interpolator="@anim/endy_callback_interpolator"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:layout_marginBottom="32dp"
