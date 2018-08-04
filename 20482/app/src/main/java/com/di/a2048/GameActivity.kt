@@ -1,19 +1,21 @@
 package com.di.a2048
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_game.*
 import android.view.MotionEvent
-
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
-import java.util.*
 import java.util.logging.Logger
 
 
@@ -23,9 +25,6 @@ class GameActivity() : AppCompatActivity()
 
         private var x1 = 0f
         private var y1 = 0f
-
-        var globalX = 0
-        var globalY = 0
 
         var valuesMatrix = arrayOf(intArrayOf(0, 0, 0, 0),
                                     intArrayOf(0, 0, 0, 0),
@@ -58,37 +57,35 @@ class GameActivity() : AppCompatActivity()
             generateNewElement(valuesMatrix, textViewsMatrix, this)
             generateNewElement(valuesMatrix, textViewsMatrix, this)
 
-            var first = true
-
             var listener = View.OnTouchListener(function = { view, motionEvent ->
+
                 if (motionEvent.action == MotionEvent.ACTION_MOVE) {
                     view.y = motionEvent.rawY - view.height
                     view.x = motionEvent.rawX - view.width / 2
-                    if (first) {
-                        first = false
-                        globalX = endyPowerUp.x.toInt()
-                        globalY = endyPowerUp.y.toInt()
-
-                        Toast.makeText(this, "x = $globalX, y = $globalY", Toast.LENGTH_SHORT).show();
-                    }
 
                     endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_powerup)
-
                 }
                 true
-
             })
             endyPowerUp.setOnTouchListener(listener)
+
 
 
             var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_UP) {
 
-//                Toast.makeText(this, "Endy should return to $globalX and $globalY", Toast.LENGTH_SHORT).show();
-//
-//                endyPowerUp.x = globalX.toFloat()
-//                endyPowerUp.y = globalY.toFloat()
-                    initMatrix(textViewsMatrix, valuesMatrix, this)
+
+
+                initMatrix(textViewsMatrix, valuesMatrix, this)
+
+                val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
+                animationEndyX.duration = 500
+
+                animationEndyX.start()
+
+                val animationEndyY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
+                animationEndyY.duration = 500
+                animationEndyY.start()
 
                 }
                 true
@@ -107,7 +104,6 @@ class GameActivity() : AppCompatActivity()
             closeGame.setOnClickListener {
                 val intent = Intent(this, GameActivity::class.java)
                 super.finish()
-
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             }
         }
