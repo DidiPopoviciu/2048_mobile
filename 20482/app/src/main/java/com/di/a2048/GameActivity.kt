@@ -16,6 +16,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.TextView
+import java.util.*
 import java.util.logging.Logger
 
 
@@ -102,20 +103,9 @@ class GameActivity() : AppCompatActivity()
             element1.setOnTouchListener(listenerChangeColor)
 
             closeGame.setOnClickListener {
-                val intent = Intent(this, GameActivity::class.java)
                 super.finish()
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             }
-        }
-
-        override fun onStart() {
-            super.onStart()
-
-            endy_x = endyPowerUp.x.toInt()
-            endy_y = endyPowerUp.y.toInt()
-
-            Toast.makeText(this, "endy_x = $endy_x & endy_y = $endy_y", Toast.LENGTH_SHORT).show();
-
         }
 
 
