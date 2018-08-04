@@ -2,10 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameScreenLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".GameActivity">
 
     <TextView
         android:id="@+id/highestScoreTitle"
@@ -25,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
+    <com.iambedant.text.OutlineTextView
         android:id="@+id/highestScoreCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,12 +35,15 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/highestScoreNumber"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/currentScoreCount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highestScoreTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/highestScoreTitle"
+
+        app:outlineColor="#ffd900"
+        app:outlineWidth="0.5" />
 
     <TextView
         android:id="@+id/currentScoreCount"
@@ -49,6 +53,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat_bold"
+        android:fontWeight="700"
+        android:includeFontPadding="false"
         android:text="@string/currentScoreNumber"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
@@ -120,7 +126,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="8"
-            android:textAlignment="center"
+            android:textAlignment="gravity"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -147,13 +153,13 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:paddingBottom="0dp"
             android:paddingTop="0dp"
             android:text="8"
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
-            android:textSize="30sp"
-            android:includeFontPadding="false" />
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button2-1"
@@ -176,8 +182,13 @@
             android:layout_marginTop="8dp"
             android:layout_row="0"
             android:background="@drawable/tile_border"
-            android:text=""
-            android:includeFontPadding="false"/>
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="8"
+            android:textAlignment="center"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button3-1"
@@ -200,8 +211,13 @@
             android:layout_marginTop="8dp"
             android:layout_row="0"
             android:background="@drawable/tile_border"
-            android:text=""
-            android:includeFontPadding="false" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="8"
+            android:textAlignment="center"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button4-1"
@@ -224,7 +240,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="2"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button5-1"
@@ -248,8 +268,11 @@
             android:layout_row="2"
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
             android:textAlignment="center"
-            android:textColor="@color/lightGrey" />
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button6-1"
@@ -272,7 +295,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="2"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button7-1"
@@ -295,7 +322,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="2"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button8-1"
@@ -318,7 +349,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="4"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button9-1"
@@ -341,7 +376,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="4"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button10-1"
@@ -364,7 +403,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="4"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button11-1"
@@ -387,7 +430,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="4"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button12-1"
@@ -410,7 +457,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="6"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button13-1"
@@ -433,7 +484,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="6"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button14-1"
@@ -456,7 +511,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="6"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button15-1"
@@ -479,7 +538,11 @@
             android:layout_marginTop="8dp"
             android:layout_row="6"
             android:background="@drawable/tile_border"
-            android:text="" />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/lightGrey"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/button16-1"
