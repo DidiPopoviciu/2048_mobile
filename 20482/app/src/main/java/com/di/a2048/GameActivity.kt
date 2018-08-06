@@ -1,13 +1,17 @@
 package com.di.a2048
 
+import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
+import android.animation.TimeInterpolator
 import android.content.Context
 import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Rect
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_game.*
@@ -15,9 +19,15 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import java.util.logging.Logger
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.widget.GridLayout
+import com.di.a2048.R.id.message
 
 
 class GameActivity() : AppCompatActivity()
@@ -34,7 +44,6 @@ class GameActivity() : AppCompatActivity()
         )
 
         var textViewsMatrix = arrayOf<Array<TextView>>()
-
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -60,26 +69,49 @@ class GameActivity() : AppCompatActivity()
                     view.y = motionEvent.rawY - view.height
                     view.x = motionEvent.rawX - view.width / 2
 
-                    endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_powerup)
+                    endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_drag)
+
+                    endyCollided()
+
                 }
+
+                if (motionEvent.action == MotionEvent.ACTION_UP) {
+
+                    if (endyCollided() == false)
+                    {
+//                        Toast.makeText(this, "if: Not Collided", Toast.LENGTH_SHORT).show()
+
+                        val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
+                        animationEndyX.duration = 350
+                        animationEndyX.setInterpolator(AccelerateDecelerateInterpolator())
+                        animationEndyX.start()
+
+                        val animationEndyY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
+                        animationEndyY.duration = 350
+                        animationEndyY.setInterpolator(DecelerateInterpolator())
+                        animationEndyY.start()
+
+                        Handler().postDelayed({
+                            val headShake = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f, 15f, -15f, 6f, -6f, 0f)
+                            headShake.duration = 500
+                            headShake.start()
+                        }, 350)
+
+                        endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
+                    }
+                    else {
+//                        Toast.makeText(this, "else: Collided", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
                 true
             })
             endyPowerUp.setOnTouchListener(listener)
-
-
 
             var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_UP) {
 
                     startNewGame()
-                    val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
-                    animationEndyX.duration = 500
-
-                    animationEndyX.start()
-
-                    val animationEndyY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
-                    animationEndyY.duration = 500
-                    animationEndyY.start()
 
                 }
                 true
@@ -161,6 +193,7 @@ class GameActivity() : AppCompatActivity()
                     buttons_matrix[i][j].setBackgroundResource(R.drawable.tile_border)
                     buttons_matrix[i][j].text = '0'.toString()
                     buttons_matrix[i][j].setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
+
                     valuesMatrix[i][j] = 0
 //                    buttons_matrix[i][j].setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
                 }
@@ -268,6 +301,15 @@ class GameActivity() : AppCompatActivity()
             generateNewElement(valuesMatrix, textViewsMatrix, this)
             generateNewElement(valuesMatrix, textViewsMatrix, this)
         }
+
+        fun endyCollided(): Boolean {
+
+            val viewRect: Rect = Rect(gridLayout.x.toInt(), gridLayout.y.toInt(), gridLayout.x.toInt() + gridLayout.width, gridLayout.y.toInt() + gridLayout.height)
+            val endyRect: Rect = Rect(endyPowerUp.x.toInt(), endyPowerUp.y.toInt(), endyPowerUp.x.toInt() + endyPowerUp.width, endyPowerUp.y.toInt() + endyPowerUp.height)
+            return viewRect.intersect(endyRect)
+
+        }
+
     }
 
 

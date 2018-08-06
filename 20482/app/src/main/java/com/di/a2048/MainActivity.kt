@@ -1,5 +1,7 @@
 package com.di.a2048
 
+import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +10,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.util.DisplayMetrics
 import android.view.*
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -94,6 +98,29 @@ class MainActivity : AppCompatActivity() {
             when (countVitality) {
                 in 0..3 -> {
                     countVitality += 1
+
+//                    val sharedPref = MainActivity.getPreferences(Context.MODE_PRIVATE) ?: return
+//                    with (sharedPref.edit()) {
+//                        putInt(getString(R.string.vitalityBadge2), newVitalityCount)
+//                        commit()
+//                    }
+
+                    val headScaleY = ObjectAnimator.ofFloat(openDialog, "scaleY", 1.2f, 1f)
+                    headScaleY.duration = 200
+                    headScaleY.start()
+
+                    val headScaleX = ObjectAnimator.ofFloat(openDialog, "scaleX", 1.2f, 1f)
+                    headScaleX.duration = 200
+                    headScaleX.start()
+
+                    val badgeScaleY = ObjectAnimator.ofFloat(vitalityBadge2, "scaleY", 1.2f, 1f)
+                    badgeScaleY.duration = 200
+                    badgeScaleY.start()
+
+                    val badgeScaleX = ObjectAnimator.ofFloat(vitalityBadge2, "scaleX", 1.2f, 1f)
+                    badgeScaleX.duration = 200
+                    badgeScaleX.start()
+
                     vitalityBadge2.text = countVitality.toString()
 
 
@@ -101,19 +128,36 @@ class MainActivity : AppCompatActivity() {
                         endyMessage.text = "+1 vitality"
                         Handler().postDelayed({
                             endyMessage.visibility = View.INVISIBLE
-                        }, 1000)
+                        }, 500)
                     }
                     else {
                         endyMessage.visibility = View.VISIBLE
                         endyMessage.text = "+1 vitality"
                         Handler().postDelayed({
                             endyMessage.visibility = View.INVISIBLE
-                        }, 1000)
+                        }, 500)
                     }
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_first_step)
                     }
                 in 4..8 -> {
                     countVitality += 1
+
+                    val headScaleY = ObjectAnimator.ofFloat(openDialog, "scaleY", 1.2f, 1f)
+                    headScaleY.duration = 200
+                    headScaleY.start()
+
+                    val headScaleX = ObjectAnimator.ofFloat(openDialog, "scaleX", 1.2f, 1f)
+                    headScaleX.duration = 200
+                    headScaleX.start()
+
+                    val badgeScaleY = ObjectAnimator.ofFloat(vitalityBadge2, "scaleY", 1.2f, 1f)
+                    badgeScaleY.duration = 200
+                    badgeScaleY.start()
+
+                    val badgeScaleX = ObjectAnimator.ofFloat(vitalityBadge2, "scaleX", 1.2f, 1f)
+                    badgeScaleX.duration = 200
+                    badgeScaleX.start()
+
                     vitalityBadge2.text = countVitality.toString()
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_second_step)
 
@@ -121,26 +165,43 @@ class MainActivity : AppCompatActivity() {
                         endyMessage.text = "+1 vitality"
                         Handler().postDelayed({
                             endyMessage.visibility = View.INVISIBLE
-                        }, 1000)
+                        }, 500)
                     }
                     else {
                         endyMessage.visibility = View.VISIBLE
                         endyMessage.text = "+1 vitality"
                         Handler().postDelayed({
                             endyMessage.visibility = View.INVISIBLE
-                        }, 1000)
+                        }, 500)
                     }
                 }
                 9 -> {
 //                        Toast.makeText(this, "Case 5-9, countVit=10", Toast.LENGTH_SHORT).show();
                     countVitality += 1
+
+                    val headShake = ObjectAnimator.ofFloat(openDialog, "scaleY", 1.2f, 1f)
+                    headShake.duration = 200
+                    headShake.start()
+
+                    val headScaleX = ObjectAnimator.ofFloat(openDialog, "scaleX", 1.2f, 1f)
+                    headScaleX.duration = 200
+                    headScaleX.start()
+
+                    val badgeScaleY = ObjectAnimator.ofFloat(vitalityBadge2, "scaleY", 1.2f, 1f)
+                    badgeScaleY.duration = 200
+                    badgeScaleY.start()
+
+                    val badgeScaleX = ObjectAnimator.ofFloat(vitalityBadge2, "scaleX", 1.2f, 1f)
+                    badgeScaleX.duration = 200
+                    badgeScaleX.start()
+
                     vitalityBadge2.text = countVitality.toString()
                     endyMessage.text = "Endy has all the energy in the world!"
                     if (endyMessage.visibility == View.INVISIBLE){
                         endyMessage.visibility = View.VISIBLE
                         Handler().postDelayed({
                             endyMessage.visibility = View.INVISIBLE
-                        }, 5000)
+                        }, 3000)
                     }
                     else {endyMessage.visibility = View.INVISIBLE}
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_max)
@@ -148,11 +209,22 @@ class MainActivity : AppCompatActivity() {
 
                     Handler().postDelayed({
                         endyMessage.visibility = View.INVISIBLE
-                    }, 5000)
+                    }, 2500)
 
                 }
                 else -> {
 //                    Toast.makeText(this, "In the else case", Toast.LENGTH_SHORT).show();
+
+                    val headShake = ObjectAnimator.ofFloat(openDialog, "translationX", 0f, 15f, -15f, 6f, -6f, 0f)
+                    headShake.duration = 500
+                    headShake.start()
+
+                    openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_powerup)
+
+                    Handler().postDelayed({
+                        openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_happy)
+                    }, 500)
+
                     endyMessage.text = "Endy cannot store more vitality"
                     if (endyMessage.visibility == View.INVISIBLE){
                         endyMessage.visibility = View.VISIBLE
