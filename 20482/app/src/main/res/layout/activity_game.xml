@@ -33,6 +33,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/montserrat_bold"
+        android:includeFontPadding="false"
+        android:padding="4dp"
         android:text="@string/highestScoreNumber"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
@@ -40,8 +42,8 @@
         app:layout_constraintBottom_toTopOf="@+id/currentScoreCount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highestScoreTitle"
 
+        app:layout_constraintTop_toBottomOf="@+id/highestScoreTitle"
         app:outlineColor="#ffd900"
         app:outlineWidth="0.5" />
 
@@ -81,14 +83,14 @@
 
     <Button
         android:id="@+id/endyPowerUp"
-        android:interpolator="@anim/endy_callback_interpolator"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/ic_ic_endy_happy"
+        android:background="@drawable/ic_endy_normal"
+        android:interpolator="@anim/endy_callback_interpolator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -101,11 +103,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:horizontalSpacing="10dp"
-        android:padding="4dp"
+        android:padding="0dp"
         android:verticalSpacing="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +127,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:includeFontPadding="false"
-             
+
             android:textAlignment="gravity"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
@@ -157,7 +158,7 @@
             android:includeFontPadding="false"
             android:paddingBottom="0dp"
             android:paddingTop="0dp"
-             
+
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
@@ -214,7 +215,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:includeFontPadding="false"
-             
+
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
@@ -242,7 +243,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -269,7 +270,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textAlignment="center"
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
@@ -297,7 +298,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -324,7 +325,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -351,7 +352,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -378,7 +379,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -405,7 +406,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -432,7 +433,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -459,7 +460,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -486,7 +487,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -513,7 +514,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -540,7 +541,7 @@
             android:background="@drawable/tile_border"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
-             
+
             android:textColor="@color/lightGrey"
             android:textSize="30sp" />
 
@@ -575,5 +576,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_restart_game" />
+
+    <ImageView
+        android:id="@+id/endyPowerUp2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_ic_endy_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/vitalityInfo"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/vitality_left"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:text="2"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/endyPowerUp2"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
