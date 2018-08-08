@@ -19,6 +19,8 @@ import kotlinx.android.synthetic.main.custom_dialog.view.*
 
 class MainActivity : AppCompatActivity() {
 
+    var globalVitalityGeneral = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
 //        requestWindowFeature(Window.FEATURE_ACTION_BAR)
@@ -38,6 +40,17 @@ class MainActivity : AppCompatActivity() {
         val height_of_screen = displayMetrics.heightPixels
 
         var logo_height = 0
+
+        val mypreference2 = MyPreference(this)
+        globalVitalityGeneral = mypreference2.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+
+
+        val mypreference = MyPreference(this)
+        var vitalityCount = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+
+        var countVitality = vitalityCount
+
+        vitalityBadge2.text = vitalityCount.toString()
 
 //        logo_height = (20 * height_of_screen)/100
 //        textV.text = logo_height.toString()
@@ -81,12 +94,19 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        var countVitality = vitalityBadge2.text.toString().toInt()
+
 
         var resetVitality = View.OnTouchListener(function = { view, motionEvent -> if(motionEvent.action == MotionEvent.ACTION_UP) {
             countVitality = 0
             openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
             vitalityBadge2.text = "0"
+
+            vitalityCount = 0
+
+            globalVitalityGeneral = 0
+
+            mypreference.setVItalityCount(countVitality)
+
             addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_add_vitality)
         }
             true })
@@ -95,9 +115,14 @@ class MainActivity : AppCompatActivity() {
 
         var listenerAddVitality = View.OnTouchListener(function = { view, motionEvent -> if(motionEvent.action == MotionEvent.ACTION_UP) {
 
-            when (countVitality) {
+            when (globalVitalityGeneral) {
                 in 0..3 -> {
-                    countVitality += 1
+                    countVitality ++
+
+                    globalVitalityGeneral++
+
+                    mypreference.setVItalityCount(globalVitalityGeneral)
+
 
 //                    val sharedPref = MainActivity.getPreferences(Context.MODE_PRIVATE) ?: return
 //                    with (sharedPref.edit()) {
@@ -121,7 +146,7 @@ class MainActivity : AppCompatActivity() {
                     badgeScaleX.duration = 200
                     badgeScaleX.start()
 
-                    vitalityBadge2.text = countVitality.toString()
+                    vitalityBadge2.text = globalVitalityGeneral.toString()
 
 
                     if (endyMessage.visibility == View.VISIBLE){
@@ -140,7 +165,11 @@ class MainActivity : AppCompatActivity() {
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_first_step)
                     }
                 in 4..8 -> {
-                    countVitality += 1
+                    countVitality ++
+
+                    globalVitalityGeneral++
+
+                    mypreference.setVItalityCount(globalVitalityGeneral)
 
                     val headScaleY = ObjectAnimator.ofFloat(openDialog, "scaleY", 1.2f, 1f)
                     headScaleY.duration = 200
@@ -158,7 +187,7 @@ class MainActivity : AppCompatActivity() {
                     badgeScaleX.duration = 200
                     badgeScaleX.start()
 
-                    vitalityBadge2.text = countVitality.toString()
+                    vitalityBadge2.text = globalVitalityGeneral.toString()
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_second_step)
 
                     if (endyMessage.visibility == View.VISIBLE) {
@@ -177,7 +206,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 9 -> {
 //                        Toast.makeText(this, "Case 5-9, countVit=10", Toast.LENGTH_SHORT).show();
-                    countVitality += 1
+                    countVitality ++
+
+                    globalVitalityGeneral++
+
+                    mypreference.setVItalityCount(globalVitalityGeneral)
 
                     val headShake = ObjectAnimator.ofFloat(openDialog, "scaleY", 1.2f, 1f)
                     headShake.duration = 200
@@ -195,7 +228,7 @@ class MainActivity : AppCompatActivity() {
                     badgeScaleX.duration = 200
                     badgeScaleX.start()
 
-                    vitalityBadge2.text = countVitality.toString()
+                    vitalityBadge2.text = globalVitalityGeneral.toString()
                     endyMessage.text = "Endy has all the energy in the world!"
                     if (endyMessage.visibility == View.INVISIBLE){
                         endyMessage.visibility = View.VISIBLE
@@ -241,5 +274,16 @@ class MainActivity : AppCompatActivity() {
 
         addVitality.setOnTouchListener(listenerAddVitality)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val mypreference = MyPreference(this)
+        globalVitalityGeneral = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+
+        vitalityBadge2.text = globalVitalityGeneral.toString()
+
+//        globalVitalityGeneral--
     }
 }

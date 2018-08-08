@@ -603,7 +603,7 @@
         android:background="@drawable/vitality_left"
         android:fontFamily="@font/montserrat_bold"
         android:gravity="center"
-        android:text="2"
+        android:text="0"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
