@@ -28,6 +28,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.GridLayout
 import com.di.a2048.R.id.message
+import android.util.DisplayMetrics
 
 
 class GameActivity() : AppCompatActivity()
@@ -45,6 +46,10 @@ class GameActivity() : AppCompatActivity()
 
         var textViewsMatrix = arrayOf<Array<TextView>>()
 
+
+
+
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
@@ -55,6 +60,19 @@ class GameActivity() : AppCompatActivity()
             setContentView(R.layout.activity_game)
             supportActionBar?.hide()
 
+            val mypreference = MyPreference(this)
+            var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+
+//            var endyVitality = gameVitality
+
+            vitalityInfo.text = gameVitality.toString()
+
+            val displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+            var widthScreen = displayMetrics.widthPixels
+            var heightScreen = displayMetrics.heightPixels
+
             textViewsMatrix = arrayOf(arrayOf(element1, element2, element3, element4),
                     arrayOf(element5, element6, element7, element8),
                     arrayOf(element9, element10, element11, element12),
@@ -63,50 +81,113 @@ class GameActivity() : AppCompatActivity()
 
             startNewGame()
 
-            var listener = View.OnTouchListener(function = { view, motionEvent ->
 
-                if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                    view.y = motionEvent.rawY - view.height
-                    view.x = motionEvent.rawX - view.width / 2
+                var listener = View.OnTouchListener(function = { view, motionEvent ->
 
-                    endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_drag)
+                    if (gameVitality > 0) {
 
-                    endyCollided()
+                        Log.warning("if 1")
 
-                }
+                        if (motionEvent.action == MotionEvent.ACTION_MOVE) {
+                            view.y = motionEvent.rawY - view.height
+                            view.x = motionEvent.rawX - view.width / 2
 
-                if (motionEvent.action == MotionEvent.ACTION_UP) {
+                            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_drag)
 
-                    if (endyCollided() == false)
-                    {
-//                        Toast.makeText(this, "if: Not Collided", Toast.LENGTH_SHORT).show()
+                            endyCollided()
 
-                        val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
-                        animationEndyX.duration = 350
-                        animationEndyX.setInterpolator(AccelerateDecelerateInterpolator())
-                        animationEndyX.start()
+                        }
 
-                        val animationEndyY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
-                        animationEndyY.duration = 350
-                        animationEndyY.setInterpolator(DecelerateInterpolator())
-                        animationEndyY.start()
+                        if (motionEvent.action == MotionEvent.ACTION_UP) {
 
-                        Handler().postDelayed({
-                            val headShake = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f, 15f, -15f, 6f, -6f, 0f)
-                            headShake.duration = 500
-                            headShake.start()
-                        }, 350)
+                            if (endyCollided() == false) {
+                                //                        Toast.makeText(this, "if: Not Collided", Toast.LENGTH_SHORT).show()
 
-                        endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
+                                val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
+                                animationEndyX.duration = 350
+                                animationEndyX.setInterpolator(AccelerateDecelerateInterpolator())
+                                animationEndyX.start()
+
+                                val animationEndyY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
+                                animationEndyY.duration = 350
+                                animationEndyY.setInterpolator(DecelerateInterpolator())
+                                animationEndyY.start()
+
+                                Handler().postDelayed({
+                                    val headShake = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f, 15f, -15f, 6f, -6f, 0f)
+                                    headShake.duration = 500
+                                    headShake.start()
+                                }, 350)
+
+                                endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
+                            } else {
+                                //                        Toast.makeText(this, "else: Collided", Toast.LENGTH_SHORT).show()
+                                //                        endyVitality--
+
+                                val animationEndyActivatedX = ObjectAnimator.ofFloat(endyPowerUp, "scaleX", 1.5f, 0f)
+                                animationEndyActivatedX.duration = 250
+                                animationEndyActivatedX.setInterpolator(AccelerateDecelerateInterpolator())
+                                animationEndyActivatedX.start()
+
+                                val animationEndyActivatedY = ObjectAnimator.ofFloat(endyPowerUp, "scaleY", 1.5f, 0f)
+                                animationEndyActivatedY.duration = 250
+                                animationEndyActivatedY.setInterpolator(AccelerateDecelerateInterpolator())
+                                animationEndyActivatedY.start()
+
+                                Handler().postDelayed({
+
+                                    endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
+
+                                    val animationEndyActivatedGoBackX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
+                                    animationEndyActivatedGoBackX.duration = 0
+                                    animationEndyActivatedGoBackX.start()
+
+                                    val animationEndyActivatedGoBackY = ObjectAnimator.ofFloat(endyPowerUp, "translationY", 0f)
+                                    animationEndyActivatedGoBackY.duration = 0
+                                    animationEndyActivatedGoBackY.start()
+                                }, 450)
+
+                                Handler().postDelayed({
+                                    val endyPopUpX = ObjectAnimator.ofFloat(endyPowerUp, "scaleX", 1.2f, 0.9f, 1f)
+                                    endyPopUpX.duration = 200
+                                    endyPopUpX.start()
+
+                                    val endyPopUpY = ObjectAnimator.ofFloat(endyPowerUp, "scaleY", 1.2f, 0.9f, 1f)
+                                    endyPopUpY.duration = 200
+                                    endyPopUpY.start()
+                                }, 500)
+
+                                if (gameVitality > 0) {
+
+                                    gameVitality -= 1
+
+                                    vitalityInfo.text = gameVitality.toString()
+
+                                    mypreference.setVItalityCount(gameVitality)
+                                } else {
+                                    gameVitality = 0
+
+                                    //                            vitalityInfo.text = gameVitality.toString()
+
+                                    mypreference.setVItalityCount(gameVitality)
+                                }
+
+                            }
+                        }
                     }
                     else {
-//                        Toast.makeText(this, "else: Collided", Toast.LENGTH_SHORT).show()
-                    }
-                }
 
-                true
-            })
-            endyPowerUp.setOnTouchListener(listener)
+                        Log.warning("if 2")
+
+                        val headShake = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f, 15f, -15f, 6f, -6f, 0f)
+                        headShake.duration = 500
+                        headShake.start()
+                    }
+
+                    true
+                })
+                endyPowerUp.setOnTouchListener(listener)
+
 
             var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_UP) {
