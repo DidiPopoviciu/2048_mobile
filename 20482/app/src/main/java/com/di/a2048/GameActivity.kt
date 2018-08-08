@@ -233,7 +233,6 @@ class GameActivity() : AppCompatActivity()
                     //if left to right sweep event on screen
                     if (x1 < x2 && x2 - x1 > minDistance) {
                         generateNewElement(valuesMatrix, textViewsMatrix, this)
-                        Log.warning("Left to Right Swap Performed")
 
                         //                        moved = game.actionMove(Moves.Right)
                     }
