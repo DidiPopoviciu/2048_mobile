@@ -232,7 +232,9 @@ class GameActivity() : AppCompatActivity()
 
                     //if left to right sweep event on screen
                     if (x1 < x2 && x2 - x1 > minDistance) {
+                        swipeRight(textViewsMatrix, valuesMatrix)
                         generateNewElement(valuesMatrix, textViewsMatrix, this)
+
 
                         //                        moved = game.actionMove(Moves.Right)
                     }
@@ -248,6 +250,7 @@ class GameActivity() : AppCompatActivity()
                     if (y1 < y2 && y2 - y1 > minDistance) {
                         generateNewElement(valuesMatrix, textViewsMatrix, this)
                         Log.warning("UP to Down Swap Performed")
+                        swipeDown(textViewsMatrix, valuesMatrix)
                         //                        moved = game.actionMove(Moves.Down)
                     }
 
@@ -390,6 +393,45 @@ class GameActivity() : AppCompatActivity()
 
         }
 
+        private fun swipeDown(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>){
+            for (i in 0 until valuesMatrix[0].size) {
+                for (j in valuesMatrix.size-1 until 0) {
+
+                    if(valuesMatrix[i][j] == valuesMatrix[i][j-1]) {
+                        Log.warning("transition:  x[{}][{}] -> x[{}][{}] - ->".format(i,j,i,j))
+                    }
+                }
+            }
+        }
+
+        private fun swipeRight(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>){
+            Log.warning("Left to Right Swap Performed")
+
+            var elementMap = arrayOf(arrayOf("el0", "el1", "el2", "el3"),
+                   arrayOf("el4", "el5", "el6", "el7"),
+                    arrayOf("el8", "el9", "el10", "el11"),
+                    arrayOf("el12", "el13", "el14", "el15")
+            )
+            var currentRow = intArrayOf(0,0,0,0)
+            for (i in 0 until valuesMatrix.size) {
+                Log.info("row number " + i.toString())
+                currentRow = valuesMatrix[i]
+                for (k in 0..3) {
+                    for (j in 0..2) {
+                        if ((currentRow[j] != 0) and (currentRow[j+1] == 0)) {
+                            Log.info("slide " + elementMap[i][j] + " with 1")
+                            elementMap[i][j+1] = elementMap[i][j]
+                            elementMap[i][j] = "x"
+                            currentRow[j + 1] = currentRow[j]
+                            currentRow[j] = 0
+                            valuesMatrix[i][j+1] = valuesMatrix[i][j]
+                            valuesMatrix[i][j] = 0
+                        }
+                    }
+                }
+            }
+            Log.info("finish")
+        }
     }
 
 
