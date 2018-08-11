@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".GameActivity2">
+
+
+    <GridView
+        android:id="@+id/tiles_background"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></GridView>
+
+<!--    <view
+        android:id="@+id/recyclerView"
+        class="android.support.v7.widget.RecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tiles_background"
+        app:layout_constraintVertical_bias="0.0">
+
+    </view>-->
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            >
+            <ImageView
+                android:id="@+id/tile_face1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_ic_face_0_v3"
+                />
+            <ImageView
+                android:id="@+id/tile_face2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_ic_face_0_v3"
+                />
+            <ImageView
+                android:id="@+id/tile_face3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_ic_face_0_v3"
+                />
+            <ImageView
+                android:id="@+id/tile_face4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_ic_face_0_v3"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="2"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+    </LinearLayout>-->
+
+</android.support.constraint.ConstraintLayout>

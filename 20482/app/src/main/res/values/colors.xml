@@ -5,4 +5,5 @@
     <color name="colorAccent">#ffd900</color>
     <color name="navigationBarColor">#212121</color>
     <color name="lightGrey">#828282</color>
+    <color name="darkGrey">#3a3a3a</color>
 </resources>

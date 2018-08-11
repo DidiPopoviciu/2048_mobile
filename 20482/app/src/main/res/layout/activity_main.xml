@@ -9,18 +9,19 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/app_name"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/startLevel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_app_title" />
+        app:srcCompat="@drawable/ic_title_11" />
 
 
     <ImageView
@@ -45,7 +46,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/ic_ic_endy_exhausted"
         android:elevation="0dp"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/endyMessage"
@@ -107,7 +107,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="@string/warningExhaustion"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="13sp"
