@@ -231,25 +231,25 @@ class GameActivity() : AppCompatActivity()
         })
         restartGame.setOnTouchListener(returnEndy)
 
-        gv.setOnTouchListener(object: OnSwipeTouchListener(this) {
-            override fun onSwipeLeft() {
-
-                android.util.Log.d("Swipe", "swipe left listener")
-            }
-            override fun onSwipeRight() {
-                android.util.Log.d("Swipe", "swipe right listener")
-
-            }
-            override fun onSwipeUp() {
-                android.util.Log.d("Swipe", "swipe up listener")
-
-            }
-            override fun onSwipeDown() {
-                android.util.Log.d("Swipe", "swipe down listener")
-
-            }
-        }
-        )
+//        gv.setOnTouchListener(object: OnSwipeTouchListener(this) {
+//            override fun onSwipeLeft() {
+//
+//                android.util.Log.d("Swipe", "swipe left listener")
+//            }
+//            override fun onSwipeRight() {
+//                android.util.Log.d("Swipe", "swipe right listener")
+//
+//            }
+//            override fun onSwipeUp() {
+//                android.util.Log.d("Swipe", "swipe up listener")
+//
+//            }
+//            override fun onSwipeDown() {
+//                android.util.Log.d("Swipe", "swipe down listener")
+//
+//            }
+//        }
+//        )
 
 
         closeGame.setOnClickListener {
@@ -404,7 +404,7 @@ class GameActivity() : AppCompatActivity()
             Log.info("pass")
             //reverse
             for (j in 0 until valuesMatrix.size) {
-                valuesMatrix[j][i] = currentRow[j]
+                cl.name[j * 4 + i] = currentRow[j].toString()
             }
         }
         if (movePerformed > 0) {
