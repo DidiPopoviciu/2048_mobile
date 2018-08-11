@@ -30,6 +30,7 @@ import android.widget.GridLayout
 import com.di.a2048.R.id.message
 import android.util.DisplayMetrics
 import android.widget.GridView
+import kotlinx.android.synthetic.main.custom_grid_tiles.view.*
 
 
 class GameActivity() : AppCompatActivity()
@@ -45,22 +46,25 @@ class GameActivity() : AppCompatActivity()
             intArrayOf(0, 0, 0, 0)
     )
 
-    var textViewsMatrix = arrayOf<Array<TextView>>()
+    var textViewsMatrix = arrayOf<Array<SquareTextView>>()
     var movePerformed = 0
 
-        var con: Context = this
-        var img: IntArray = intArrayOf(
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3)
-        var name: Array<String> = arrayOf("0", "2", "0", "4", "0", "0", "0", "0", "8", "8", "8", "16", "0", "0", "32", "0")
-        lateinit var gv: GridView
-        lateinit var cl: CustomAdapter
+    var con: Context = this
+    var img: IntArray = intArrayOf(
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3)
+    var name: Array<String> = arrayOf(  "0", "0", "0", "0",
+                                        "0", "0", "0", "0",
+                                        "0", "0", "0", "0",
+                                        "0", "0", "0", "0")
+    lateinit var gv: GridView
+    lateinit var cl: CustomAdapter
 
 
 
@@ -74,12 +78,12 @@ class GameActivity() : AppCompatActivity()
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
 
-            gv = findViewById(R.id.tiles_background) as GridView
-            cl = CustomAdapter(img, con, name)
-            gv.adapter = cl
+        gv = findViewById(R.id.tiles_background) as GridView
+        cl = CustomAdapter(img, con, name)
+        gv.adapter = cl
 
-            val mypreference = MyPreference(this)
-            var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+        val mypreference = MyPreference(this)
+        var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
 
 //            var endyVitality = gameVitality
 
@@ -91,14 +95,9 @@ class GameActivity() : AppCompatActivity()
         var widthScreen = displayMetrics.widthPixels
         var heightScreen = displayMetrics.heightPixels
 
-//        textViewsMatrix = arrayOf(arrayOf(element1, element2, element3, element4),
-//                arrayOf(element5, element6, element7, element8),
-//                arrayOf(element9, element10, element11, element12),
-//                arrayOf(element13, element14, element15, element16)
-//        )
-
-//            startNewGame()
-
+        textViewsMatrix = initTextViewMatrix()
+        startNewGame()
+        Log.warning("papa")
 
         var listener = View.OnTouchListener(function = { view, motionEvent ->
 
@@ -223,9 +222,22 @@ class GameActivity() : AppCompatActivity()
         }
     }
 
+    private fun initTextViewMatrix() : Array<Array<SquareTextView>>{
+
+        return arrayOf( arrayOf(getTextViewByNumber(0), getTextViewByNumber(1),getTextViewByNumber(2), getTextViewByNumber(3)),
+                        arrayOf(getTextViewByNumber(4), getTextViewByNumber(5),getTextViewByNumber(6), getTextViewByNumber(7)),
+                        arrayOf(getTextViewByNumber(8), getTextViewByNumber(9),getTextViewByNumber(10), getTextViewByNumber(11)),
+                        arrayOf(getTextViewByNumber(12), getTextViewByNumber(13),getTextViewByNumber(14), getTextViewByNumber(15))
+        )
+    }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
 
+        var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
+                intArrayOf(cl.name[4].toInt(), cl.name[5].toInt(), cl.name[6].toInt(), cl.name[7].toInt()),
+                intArrayOf(cl.name[8].toInt(), cl.name[9].toInt(), cl.name[10].toInt(), cl.name[11].toInt()),
+                intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
+        )
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 x1 = event.x
@@ -237,29 +249,24 @@ class GameActivity() : AppCompatActivity()
                 val y2 = event.y
 
                 val minDistance = 200
-                var moved = false
 
                 //if left to right sweep event on screen
                 if (x1 < x2 && x2 - x1 > minDistance) {
-                    swipeRight(textViewsMatrix, valuesMatrix)
-                    generateNewElement(valuesMatrix, textViewsMatrix, this)
-
-
-                    //                        moved = game.actionMove(Moves.Right)
+                    swipeRight(valuesMatrix)
                 }
 
                 // if right to left sweep event on screen
                 if (x1 > x2 && x1 - x2 > minDistance) {
-                    swipeLeft(textViewsMatrix, valuesMatrix)
+                    swipeLeft(valuesMatrix)
                 }
 
                 // if UP to Down sweep event on screen
                 if (y1 < y2 && y2 - y1 > minDistance) {
-                    swipeDown(textViewsMatrix, valuesMatrix) }
+                    swipeDown(valuesMatrix) }
 
                 //if Down to UP sweep event on screen
                 if (y1 > y2 && y1 - y2 > minDistance) {
-                    swipeUp(textViewsMatrix, valuesMatrix)
+                    swipeUp(valuesMatrix)
                 }
 
             }
@@ -267,32 +274,16 @@ class GameActivity() : AppCompatActivity()
         return true
     }
 
-
-    private fun initMatrix(buttons_matrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>, context:Context)
-    {
-        for (i in 0 until buttons_matrix.size) {
-            for (j in 0 until buttons_matrix[0].size) {
-                buttons_matrix[i][j].setBackgroundResource(R.drawable.tile_border)
-                buttons_matrix[i][j].text = '0'.toString()
-                buttons_matrix[i][j].setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
-
-                valuesMatrix[i][j] = 0
-//                    buttons_matrix[i][j].setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
-            }
-        }
-    }
-
-
-    private fun generateNewElement(values_matrix:Array<IntArray>,
-                                   buttons_matrix:Array<Array<TextView>>, context:Context) {
+    private fun generateNewElement() {
+        Log.warning("cl: ")
+        Log.warning(cl.name.toString())
         var availableElements  = listOf<Int>()
-        for (i in 0 until values_matrix.size) {
-            for (j in 0 until values_matrix[0].size) {
-                if (0 == values_matrix[i][j]) {
-                    availableElements  += i * 4 + j
-                }
+        for (i in 0 until cl.name.size) {
+            if (0 == cl.name[i].toInt()) {
+                availableElements  += i
             }
         }
+
         if (availableElements .isNotEmpty()) {
             Log.warning("Available: ")
             Log.warning(availableElements .toString())
@@ -300,75 +291,12 @@ class GameActivity() : AppCompatActivity()
             val randomIndex = Random().nextInt(availableElements .size)
 
             Log.warning("Random: ")
-            Log.warning(availableElements [randomIndex].toString())
-            Log.warning("___________________________________")
+            Log.warning(availableElements[randomIndex].toString())
 
-            when (availableElements [randomIndex]) {
-                0 -> {
-                    generateNewElementWrite(buttons_matrix[0][0], this)
-                    values_matrix[0][0] = 2
-                }
-                1 -> {
-                    generateNewElementWrite(buttons_matrix[0][1], this)
-                    values_matrix[0][1] = 2
-                }
-                2 -> {
-                    generateNewElementWrite(buttons_matrix[0][2], this)
-                    values_matrix[0][2] = 2
-                }
-                3 -> {
-                    generateNewElementWrite(buttons_matrix[0][3], this)
-                    values_matrix[0][3] = 2
-                }
-                4 -> {
-                    generateNewElementWrite(buttons_matrix[1][0], this)
-                    values_matrix[1][0] = 2
-                }
-                5 -> {
-                    generateNewElementWrite(buttons_matrix[1][1], this)
-                    values_matrix[1][1] = 2
-                }
-                6 -> {
-                    generateNewElementWrite(buttons_matrix[1][2], this)
-                    values_matrix[1][2] = 2
-                }
-                7 -> {
-                    generateNewElementWrite(buttons_matrix[1][3], this)
-                    values_matrix[1][3] = 2
-                }
-                8 -> {
-                    generateNewElementWrite(buttons_matrix[2][0], this)
-                    values_matrix[2][0] = 2
-                }
-                9 -> {
-                    generateNewElementWrite(buttons_matrix[2][1], this)
-                    values_matrix[2][1] = 2
-                }
-                10 -> {
-                    generateNewElementWrite(buttons_matrix[2][2], this)
-                    values_matrix[2][2] = 2
-                }
-                11 -> {
-                    generateNewElementWrite(buttons_matrix[2][3], this)
-                    values_matrix[2][3] = 2
-                }
-                12 -> {
-                    generateNewElementWrite(buttons_matrix[3][0], this)
-                    values_matrix[3][0] = 2
-                }
-                13 -> {
-                    generateNewElementWrite(buttons_matrix[3][1], this)
-                    values_matrix[3][1] = 2
-                }
-                14 -> {
-                    generateNewElementWrite(buttons_matrix[3][2], this)
-                    values_matrix[3][2] = 2
-                }
-                15 -> {
-                    generateNewElementWrite(buttons_matrix[3][3], this)
-                    values_matrix[3][3] = 2
-                }
-            }
+            cl.name[availableElements[randomIndex]] = "2"
+            cl.notifyDataSetChanged()
+            gv.adapter = cl
+
         }
     }
 
@@ -378,10 +306,16 @@ class GameActivity() : AppCompatActivity()
         view.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
     }
 
+    private fun getTextViewByNumber(n: Int): SquareTextView {
+        return cl.getView(n, tiles_background, null).element_skin.tile_number_background
+    }
+
+    private fun getTextViewValueByNumber(n: Int): Int{
+        return (cl.getView(1, tiles_background, null).element_skin.tile_number_background.text).toString().toInt()
+    }
     private fun startNewGame(){
-        initMatrix(textViewsMatrix, valuesMatrix, this)
-        generateNewElement(valuesMatrix, textViewsMatrix, this)
-        generateNewElement(valuesMatrix, textViewsMatrix, this)
+        generateNewElement()
+        generateNewElement()
     }
 
     fun endyCollided(): Boolean {
@@ -392,7 +326,7 @@ class GameActivity() : AppCompatActivity()
 
     }
 
-    private fun swipeUp(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>){
+    private fun swipeUp(valuesMatrix : Array<IntArray>){
         movePerformed = 0
         var currentRow = intArrayOf(0,0,0,0)
         for (i in 0 until valuesMatrix.size) {
@@ -408,16 +342,15 @@ class GameActivity() : AppCompatActivity()
             Log.info("pass")
             //reverse
             for (j in 0 until valuesMatrix.size) {
-                valuesMatrix[j][i] = currentRow[j]
+                cl.name[j * 4 + i] = currentRow[j].toString()
             }
         }
         if (movePerformed > 0) {
-            updateView(buttonsMatrix, valuesMatrix, this)
-            generateNewElement(valuesMatrix, textViewsMatrix, this)
+            generateNewElement()
         }
     }
 
-    private fun swipeDown(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>){
+    private fun swipeDown(valuesMatrix : Array<IntArray>){
         movePerformed = 0
         var currentRow = intArrayOf(0,0,0,0)
         for (i in 0 until valuesMatrix.size) {
@@ -435,23 +368,16 @@ class GameActivity() : AppCompatActivity()
             Log.info("pass")
             //reverse
             for (j in 0 until valuesMatrix.size) {
-                valuesMatrix[j][i] = currentRow[j]
+                cl.name[j * 4 + i] = currentRow[j].toString()
             }
         }
         if (movePerformed > 0) {
-            updateView(buttonsMatrix, valuesMatrix, this)
-            generateNewElement(valuesMatrix, textViewsMatrix, this)
+            generateNewElement()
         }
     }
 
-    private fun swipeRight(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>)
-    {
-        movePerformed = 0
-        var elementMap = arrayOf(arrayOf("el0", "el1", "el2", "el3"),
-                arrayOf("el4", "el5", "el6", "el7"),
-                arrayOf("el8", "el9", "el10", "el11"),
-                arrayOf("el12", "el13", "el14", "el15")
-        )
+    private fun swipeRight(valuesMatrix : Array<IntArray>){
+
         var currentRow = intArrayOf(0,0,0,0)
         for (i in 0 until valuesMatrix.size) {
 
@@ -462,22 +388,18 @@ class GameActivity() : AppCompatActivity()
             currentRow = combine(currentRow)
             currentRow = slide(currentRow)
             currentRow.reverse()
-            valuesMatrix[i] = currentRow
+            for(j in 0 until valuesMatrix[0].size) {
+                cl.name[i * 4 + j] = currentRow[j].toString()
+            }
         }
         if (movePerformed > 0) {
-            updateView(buttonsMatrix, valuesMatrix, this)
-            generateNewElement(valuesMatrix, textViewsMatrix, this)
+            generateNewElement()
         }
     }
 
-    private fun swipeLeft(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>)
-    {
+    private fun swipeLeft(valuesMatrix : Array<IntArray>){
         movePerformed = 0
-        var elementMap = arrayOf(arrayOf("el0", "el1", "el2", "el3"),
-                arrayOf("el4", "el5", "el6", "el7"),
-                arrayOf("el8", "el9", "el10", "el11"),
-                arrayOf("el12", "el13", "el14", "el15")
-        )
+
         var currentRow = intArrayOf(0,0,0,0)
 
         for (i in 0 until valuesMatrix.size) {
@@ -487,11 +409,12 @@ class GameActivity() : AppCompatActivity()
             currentRow = slide(currentRow)
             currentRow = combine(currentRow)
             currentRow = slide(currentRow)
-            valuesMatrix[i] = currentRow
+            for(j in 0 until valuesMatrix[0].size) {
+                cl.name[i * 4 + j] = currentRow[j].toString()
+            }
         }
         if (movePerformed > 0) {
-            updateView(buttonsMatrix, valuesMatrix, this)
-            generateNewElement(valuesMatrix, textViewsMatrix, this)
+            generateNewElement()
         }
     }
 
@@ -549,9 +472,11 @@ class GameActivity() : AppCompatActivity()
         return row
     }
 
-    private fun updateView(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>, context:Context)
+    private fun updateView()
     {
-        for(i in valuesMatrix.size-1 downTo  0){
+        cl.notifyDataSetChanged()
+        gv.adapter = cl
+       /* for(i in valuesMatrix.size-1 downTo  0){
             for(j in valuesMatrix[i].size-1 downTo 0){
                 if (valuesMatrix[i][j] != buttonsMatrix[i][j].text.toString().toInt()){
                     if (buttonsMatrix[i][j].text.toString().toInt() == 0){ // and valuesMatrix[i][j] != 0){
@@ -567,36 +492,11 @@ class GameActivity() : AppCompatActivity()
                 buttonsMatrix[i][j].text = valuesMatrix[i][j].toString()
                 print("update")
             }
-        }
+        }*/
     }
 
-    private fun swipeRightOld(buttonsMatrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>){
-        Log.warning("Left to Right Swap Performed")
+    private fun updateAdapterWithVales(){
 
-        var elementMap = arrayOf(arrayOf("el0", "el1", "el2", "el3"),
-                arrayOf("el4", "el5", "el6", "el7"),
-                arrayOf("el8", "el9", "el10", "el11"),
-                arrayOf("el12", "el13", "el14", "el15")
-        )
-        var currentRow = intArrayOf(0,0,0,0)
-        for (i in 0 until valuesMatrix.size) {
-            Log.info("row number " + i.toString())
-            currentRow = valuesMatrix[i]
-            for (k in 0..3) {
-                for (j in 0..2) {
-                    if ((currentRow[j] != 0) and (currentRow[j+1] == 0)) {
-                        Log.info("slide " + elementMap[i][j] + " with 1")
-                        elementMap[i][j+1] = elementMap[i][j]
-                        elementMap[i][j] = "x"
-                        currentRow[j + 1] = currentRow[j]
-                        currentRow[j] = 0
-                        valuesMatrix[i][j+1] = valuesMatrix[i][j]
-                        valuesMatrix[i][j] = 0
-                    }
-                }
-            }
-        }
-        Log.info("finish")
     }
 }
 
