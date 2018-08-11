@@ -107,6 +107,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:columnWidth="90dp"
+        android:contentDescription="Number Tiles"
         android:gravity="center"
         android:numColumns="4"
         android:stretchMode="columnWidth"

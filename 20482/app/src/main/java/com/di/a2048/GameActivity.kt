@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.content.Context
 import android.content.Intent
+import android.gesture.Gesture
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -30,6 +31,7 @@ import android.widget.GridLayout
 import com.di.a2048.R.id.message
 import android.util.DisplayMetrics
 import android.widget.GridView
+import java.lang.Math.log
 
 
 class GameActivity() : AppCompatActivity()
@@ -62,6 +64,8 @@ class GameActivity() : AppCompatActivity()
         lateinit var gv: GridView
         lateinit var cl: CustomAdapter
 
+        var globalEndyVitality = 0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,12 +78,16 @@ class GameActivity() : AppCompatActivity()
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
 
-            gv = findViewById(R.id.tiles_background) as GridView
-            cl = CustomAdapter(img, con, name)
-            gv.adapter = cl
+        gv = findViewById(R.id.tiles_background) as GridView
+        cl = CustomAdapter(img, con, name)
+        gv.adapter = cl
 
-            val mypreference = MyPreference(this)
-            var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+        val mypreference = MyPreference(this)
+        var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+
+        globalEndyVitality = gameVitality
+
+        checkEndyVitality()
 
 //            var endyVitality = gameVitality
 
@@ -90,6 +98,7 @@ class GameActivity() : AppCompatActivity()
 
         var widthScreen = displayMetrics.widthPixels
         var heightScreen = displayMetrics.heightPixels
+
 
 //        textViewsMatrix = arrayOf(arrayOf(element1, element2, element3, element4),
 //                arrayOf(element5, element6, element7, element8),
@@ -166,6 +175,10 @@ class GameActivity() : AppCompatActivity()
                         }, 450)
 
                         Handler().postDelayed({
+
+                            if (gameVitality == 0)
+                                endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+
                             val endyPopUpX = ObjectAnimator.ofFloat(endyPowerUp, "scaleX", 1.2f, 0.9f, 1f)
                             endyPopUpX.duration = 200
                             endyPopUpX.start()
@@ -184,6 +197,9 @@ class GameActivity() : AppCompatActivity()
                             mypreference.setVItalityCount(gameVitality)
                         } else {
                             gameVitality = 0
+
+                            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+
 
                             //                            vitalityInfo.text = gameVitality.toString()
 
@@ -210,21 +226,46 @@ class GameActivity() : AppCompatActivity()
         var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_UP) {
 
-                startNewGame()
+//                startNewGame()
 
             }
             true
         })
         restartGame.setOnTouchListener(returnEndy)
 
+        gv.setOnTouchListener(object: OnSwipeTouchListener(this) {
+            override fun onSwipeLeft() {
+
+                android.util.Log.d("Swipe", "swipe left listener")
+            }
+            override fun onSwipeRight() {
+                android.util.Log.d("Swipe", "swipe right listener")
+
+            }
+            override fun onSwipeUp() {
+                android.util.Log.d("Swipe", "swipe up listener")
+
+            }
+            override fun onSwipeDown() {
+                android.util.Log.d("Swipe", "swipe down listener")
+
+            }
+        }
+        )
+
+
         closeGame.setOnClickListener {
             super.finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
+
+
+
+
     }
 
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
+    /*override fun onTouchEvent(event: MotionEvent): Boolean {
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -241,31 +282,35 @@ class GameActivity() : AppCompatActivity()
 
                 //if left to right sweep event on screen
                 if (x1 < x2 && x2 - x1 > minDistance) {
-                    swipeRight(textViewsMatrix, valuesMatrix)
-                    generateNewElement(valuesMatrix, textViewsMatrix, this)
-
+//                    swipeRight(textViewsMatrix, valuesMatrix)
+//                    generateNewElement(valuesMatrix, textViewsMatrix, this)
+                    Toast.makeText(this, "swipe right", Toast.LENGTH_SHORT).show();
 
                     //                        moved = game.actionMove(Moves.Right)
                 }
 
                 // if right to left sweep event on screen
                 if (x1 > x2 && x1 - x2 > minDistance) {
-                    swipeLeft(textViewsMatrix, valuesMatrix)
+//                    swipeLeft(textViewsMatrix, valuesMatrix)
+                    Toast.makeText(this, "swipe left", Toast.LENGTH_SHORT).show();
                 }
 
                 // if UP to Down sweep event on screen
                 if (y1 < y2 && y2 - y1 > minDistance) {
-                    swipeDown(textViewsMatrix, valuesMatrix) }
+//                    swipeDown(textViewsMatrix, valuesMatrix)
+                    Toast.makeText(this, "swipe down", Toast.LENGTH_SHORT).show();
+                }
 
                 //if Down to UP sweep event on screen
                 if (y1 > y2 && y1 - y2 > minDistance) {
-                    swipeUp(textViewsMatrix, valuesMatrix)
+                    Toast.makeText(this, "swipe up", Toast.LENGTH_SHORT).show();
+//                    swipeUp(textViewsMatrix, valuesMatrix)
                 }
 
             }
         }
         return true
-    }
+    }*/
 
 
     private fun initMatrix(buttons_matrix:Array<Array<TextView>>, valuesMatrix : Array<IntArray>, context:Context)
@@ -597,6 +642,13 @@ class GameActivity() : AppCompatActivity()
             }
         }
         Log.info("finish")
+    }
+
+    fun checkEndyVitality() {
+        if (globalEndyVitality == 0)
+            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+        else
+            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
     }
 }
 
