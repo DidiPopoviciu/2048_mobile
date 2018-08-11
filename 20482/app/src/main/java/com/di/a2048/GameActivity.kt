@@ -177,7 +177,7 @@ class GameActivity() : AppCompatActivity()
                         Handler().postDelayed({
 
                             if (gameVitality == 0)
-                                endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+                                endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_exhausted_background)
 
                             val endyPopUpX = ObjectAnimator.ofFloat(endyPowerUp, "scaleX", 1.2f, 0.9f, 1f)
                             endyPopUpX.duration = 200
@@ -198,7 +198,7 @@ class GameActivity() : AppCompatActivity()
                         } else {
                             gameVitality = 0
 
-                            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+                            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_exhausted_background)
 
 
                             //                            vitalityInfo.text = gameVitality.toString()
