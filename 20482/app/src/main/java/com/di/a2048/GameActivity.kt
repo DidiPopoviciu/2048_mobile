@@ -231,25 +231,45 @@ class GameActivity() : AppCompatActivity()
         })
         restartGame.setOnTouchListener(returnEndy)
 
-//        gv.setOnTouchListener(object: OnSwipeTouchListener(this) {
-//            override fun onSwipeLeft() {
-//
-//                android.util.Log.d("Swipe", "swipe left listener")
-//            }
-//            override fun onSwipeRight() {
-//                android.util.Log.d("Swipe", "swipe right listener")
-//
-//            }
-//            override fun onSwipeUp() {
-//                android.util.Log.d("Swipe", "swipe up listener")
-//
-//            }
-//            override fun onSwipeDown() {
-//                android.util.Log.d("Swipe", "swipe down listener")
-//
-//            }
-//        }
-//        )
+        gv.setOnTouchListener(object: OnSwipeTouchListener(this) {
+
+            override fun onSwipeLeft() {
+                var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
+                        intArrayOf(cl.name[4].toInt(), cl.name[5].toInt(), cl.name[6].toInt(), cl.name[7].toInt()),
+                        intArrayOf(cl.name[8].toInt(), cl.name[9].toInt(), cl.name[10].toInt(), cl.name[11].toInt()),
+                        intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
+                )
+                swipeLeft(valuesMatrix)
+            }
+            override fun onSwipeRight() {
+                var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
+                        intArrayOf(cl.name[4].toInt(), cl.name[5].toInt(), cl.name[6].toInt(), cl.name[7].toInt()),
+                        intArrayOf(cl.name[8].toInt(), cl.name[9].toInt(), cl.name[10].toInt(), cl.name[11].toInt()),
+                        intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
+                )
+                swipeRight(valuesMatrix)
+
+            }
+            override fun onSwipeUp() {
+                var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
+                        intArrayOf(cl.name[4].toInt(), cl.name[5].toInt(), cl.name[6].toInt(), cl.name[7].toInt()),
+                        intArrayOf(cl.name[8].toInt(), cl.name[9].toInt(), cl.name[10].toInt(), cl.name[11].toInt()),
+                        intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
+                )
+                swipeUp(valuesMatrix)
+
+            }
+            override fun onSwipeDown() {
+                var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
+                        intArrayOf(cl.name[4].toInt(), cl.name[5].toInt(), cl.name[6].toInt(), cl.name[7].toInt()),
+                        intArrayOf(cl.name[8].toInt(), cl.name[9].toInt(), cl.name[10].toInt(), cl.name[11].toInt()),
+                        intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
+                )
+                swipeDown(valuesMatrix)
+
+            }
+        }
+        )
 
 
         closeGame.setOnClickListener {
@@ -267,7 +287,7 @@ class GameActivity() : AppCompatActivity()
         )
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
+    /*override fun onTouchEvent(event: MotionEvent): Boolean {
 
         var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
                 intArrayOf(cl.name[4].toInt(), cl.name[5].toInt(), cl.name[6].toInt(), cl.name[7].toInt()),
@@ -308,7 +328,7 @@ class GameActivity() : AppCompatActivity()
             }
         }
         return true
-    }
+    }*/
 
     private fun generateNewElement() {
         Log.warning("cl: ")
