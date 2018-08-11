@@ -1,12 +1,19 @@
 package com.di.a2048
 
+import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
+import android.animation.TimeInterpolator
 import android.content.Context
+import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Rect
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_game.*
 import android.view.MotionEvent
 import android.view.View
@@ -14,10 +21,15 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import java.util.logging.Logger
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.widget.GridLayout
+import com.di.a2048.R.id.message
 import android.util.DisplayMetrics
+import android.widget.GridView
 
 
 class GameActivity() : AppCompatActivity()
@@ -36,7 +48,19 @@ class GameActivity() : AppCompatActivity()
     var textViewsMatrix = arrayOf<Array<TextView>>()
     var movePerformed = 0
 
-
+        var con: Context = this
+        var img: IntArray = intArrayOf(
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3)
+        var name: Array<String> = arrayOf("0", "2", "0", "4", "0", "0", "0", "0", "8", "8", "8", "16", "0", "0", "32", "0")
+        lateinit var gv: GridView
+        lateinit var cl: CustomAdapter
 
 
 
@@ -50,8 +74,12 @@ class GameActivity() : AppCompatActivity()
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
 
-        val mypreference = MyPreference(this)
-        var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+            gv = findViewById(R.id.tiles_background) as GridView
+            cl = CustomAdapter(img, con, name)
+            gv.adapter = cl
+
+            val mypreference = MyPreference(this)
+            var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
 
 //            var endyVitality = gameVitality
 
@@ -69,7 +97,7 @@ class GameActivity() : AppCompatActivity()
 //                arrayOf(element13, element14, element15, element16)
 //        )
 
-        startNewGame()
+//            startNewGame()
 
 
         var listener = View.OnTouchListener(function = { view, motionEvent ->
