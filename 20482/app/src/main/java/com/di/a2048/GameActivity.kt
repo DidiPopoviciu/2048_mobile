@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.content.Context
 import android.content.Intent
+import android.gesture.Gesture
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -30,6 +31,7 @@ import android.widget.GridLayout
 import com.di.a2048.R.id.message
 import android.util.DisplayMetrics
 import android.widget.GridView
+import java.lang.Math.log
 import kotlinx.android.synthetic.main.custom_grid_tiles.view.*
 
 
@@ -66,6 +68,8 @@ class GameActivity() : AppCompatActivity()
     lateinit var gv: GridView
     lateinit var cl: CustomAdapter
 
+        var globalEndyVitality = 0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +88,10 @@ class GameActivity() : AppCompatActivity()
 
         val mypreference = MyPreference(this)
         var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
+
+        globalEndyVitality = gameVitality
+
+        checkEndyVitality()
 
 //            var endyVitality = gameVitality
 
@@ -165,6 +173,10 @@ class GameActivity() : AppCompatActivity()
                         }, 450)
 
                         Handler().postDelayed({
+
+                            if (gameVitality == 0)
+                                endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+
                             val endyPopUpX = ObjectAnimator.ofFloat(endyPowerUp, "scaleX", 1.2f, 0.9f, 1f)
                             endyPopUpX.duration = 200
                             endyPopUpX.start()
@@ -183,6 +195,9 @@ class GameActivity() : AppCompatActivity()
                             mypreference.setVItalityCount(gameVitality)
                         } else {
                             gameVitality = 0
+
+                            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+
 
                             //                            vitalityInfo.text = gameVitality.toString()
 
@@ -215,6 +230,27 @@ class GameActivity() : AppCompatActivity()
             true
         })
         restartGame.setOnTouchListener(returnEndy)
+
+        gv.setOnTouchListener(object: OnSwipeTouchListener(this) {
+            override fun onSwipeLeft() {
+
+                android.util.Log.d("Swipe", "swipe left listener")
+            }
+            override fun onSwipeRight() {
+                android.util.Log.d("Swipe", "swipe right listener")
+
+            }
+            override fun onSwipeUp() {
+                android.util.Log.d("Swipe", "swipe up listener")
+
+            }
+            override fun onSwipeDown() {
+                android.util.Log.d("Swipe", "swipe down listener")
+
+            }
+        }
+        )
+
 
         closeGame.setOnClickListener {
             super.finish()
@@ -368,7 +404,7 @@ class GameActivity() : AppCompatActivity()
             Log.info("pass")
             //reverse
             for (j in 0 until valuesMatrix.size) {
-                cl.name[j * 4 + i] = currentRow[j].toString()
+                valuesMatrix[j][i] = currentRow[j]
             }
         }
         if (movePerformed > 0) {
@@ -497,6 +533,13 @@ class GameActivity() : AppCompatActivity()
 
     private fun updateAdapterWithVales(){
 
+    }
+
+    fun checkEndyVitality() {
+        if (globalEndyVitality == 0)
+            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+        else
+            endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
     }
 }
 

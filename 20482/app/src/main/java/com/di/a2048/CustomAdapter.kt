@@ -31,11 +31,11 @@ class CustomAdapter : BaseAdapter {
         holder.iv = rv.findViewById(R.id.tile_face) as ImageView
         holder.tv.setText(name[p0].toString())
         holder.iv.setImageResource(img[p0])
-        rv.setOnClickListener(object  : View.OnClickListener{
+/*        rv.setOnClickListener(object  : View.OnClickListener{
             override fun onClick(p0: View?) {
                 Toast.makeText(con, holder.tv.text.toString(), Toast.LENGTH_SHORT).show()
             }
-        })
+        })*/
         return rv
     }
 
@@ -44,7 +44,7 @@ class CustomAdapter : BaseAdapter {
     }
 
     override fun getItemId(p0: Int): Long {
-        return 0
+        return p0.toLong()
     }
 
     override fun getCount(): Int {
