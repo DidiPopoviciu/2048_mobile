@@ -53,14 +53,14 @@ class GameActivity() : AppCompatActivity()
 
     var con: Context = this
     var img: IntArray = intArrayOf(
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
-            R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3)
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+            R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey)
     var name: Array<String> = arrayOf(  "0", "0", "0", "0",
                                         "0", "0", "0", "0",
                                         "0", "0", "0", "0",
