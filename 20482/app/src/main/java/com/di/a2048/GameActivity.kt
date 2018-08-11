@@ -29,6 +29,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.GridLayout
 import com.di.a2048.R.id.message
 import android.util.DisplayMetrics
+import android.widget.GridView
 
 
 class GameActivity() : AppCompatActivity()
@@ -46,7 +47,19 @@ class GameActivity() : AppCompatActivity()
 
         var textViewsMatrix = arrayOf<Array<TextView>>()
 
-
+        var con: Context = this
+        var img: IntArray = intArrayOf(
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3,
+                R.drawable.ic_ic_face_0_v3, R.drawable.ic_ic_face_0_v3)
+        var name: Array<String> = arrayOf("0", "2", "0", "4", "0", "0", "0", "0", "8", "8", "8", "16", "0", "0", "32", "0")
+        lateinit var gv: GridView
+        lateinit var cl: CustomAdapter
 
 
 
@@ -59,6 +72,10 @@ class GameActivity() : AppCompatActivity()
                     WindowManager.LayoutParams.FLAG_FULLSCREEN)
             setContentView(R.layout.activity_game)
             supportActionBar?.hide()
+
+            gv = findViewById(R.id.tiles_background) as GridView
+            cl = CustomAdapter(img, con, name)
+            gv.adapter = cl
 
             val mypreference = MyPreference(this)
             var gameVitality = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
@@ -73,13 +90,13 @@ class GameActivity() : AppCompatActivity()
             var widthScreen = displayMetrics.widthPixels
             var heightScreen = displayMetrics.heightPixels
 
-            textViewsMatrix = arrayOf(arrayOf(element1, element2, element3, element4),
+/*            textViewsMatrix = arrayOf(arrayOf(element1, element2, element3, element4),
                     arrayOf(element5, element6, element7, element8),
                     arrayOf(element9, element10, element11, element12),
                     arrayOf(element13, element14, element15, element16)
-            )
+            )*/
 
-            startNewGame()
+//            startNewGame()
 
 
                 var listener = View.OnTouchListener(function = { view, motionEvent ->
@@ -199,14 +216,6 @@ class GameActivity() : AppCompatActivity()
             })
             restartGame.setOnTouchListener(returnEndy)
 
-
-            var listenerChangeColor = View.OnTouchListener(function = { view, motionEvent ->
-                if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-                    element1.setTextColor(-0xffff01)
-                }
-                true
-            })
-            element1.setOnTouchListener(listenerChangeColor)
 
             closeGame.setOnClickListener {
                 super.finish()
@@ -387,7 +396,7 @@ class GameActivity() : AppCompatActivity()
 
         fun endyCollided(): Boolean {
 
-            val viewRect: Rect = Rect(gridLayout.x.toInt(), gridLayout.y.toInt(), gridLayout.x.toInt() + gridLayout.width, gridLayout.y.toInt() + gridLayout.height)
+            val viewRect: Rect = Rect(tiles_background.x.toInt(), tiles_background.y.toInt(), tiles_background.x.toInt() + tiles_background.width, tiles_background.y.toInt() + tiles_background.height)
             val endyRect: Rect = Rect(endyPowerUp.x.toInt(), endyPowerUp.y.toInt(), endyPowerUp.x.toInt() + endyPowerUp.width, endyPowerUp.y.toInt() + endyPowerUp.height)
             return viewRect.intersect(endyRect)
 

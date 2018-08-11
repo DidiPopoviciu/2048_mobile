@@ -44,6 +44,11 @@ class MainActivity : AppCompatActivity() {
         val mypreference2 = MyPreference(this)
         globalVitalityGeneral = mypreference2.getVitalityCount(PREFERENCE_VITALITY_COUNT)
 
+        endyMessage.visibility = View.INVISIBLE
+
+        checkVitality()
+
+
 
         val mypreference = MyPreference(this)
         var vitalityCount = mypreference.getVitalityCount(PREFERENCE_VITALITY_COUNT)
@@ -61,14 +66,21 @@ class MainActivity : AppCompatActivity() {
 
         var logo_width = 0
 
-        logo_width = (37 * height_of_screen)/100
-        textV.text = logo_width.toString()
-        imageView4.layoutParams.width = logo_width
-        imageView4.layoutParams.height = (281 * logo_width)/720
+//        logo_width = (37 * height_of_screen)/100
+//        textV.text = logo_width.toString()
+//        imageView4.layoutParams.width = logo_width
+//        imageView4.layoutParams.height = (281 * logo_width)/720
 
 
         startLevel.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
+            startActivity(intent)
+
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
+
+        imageView4.setOnClickListener {
+            val intent = Intent(this, GameActivity2::class.java)
             startActivity(intent)
 
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -284,6 +296,27 @@ class MainActivity : AppCompatActivity() {
 
         vitalityBadge2.text = globalVitalityGeneral.toString()
 
+        checkVitality()
+
 //        globalVitalityGeneral--
     }
+
+    fun checkVitality(){
+        if (globalVitalityGeneral == 0){
+            openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+
+        }
+        else if (globalVitalityGeneral > 0 && globalVitalityGeneral < 5){
+            openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_first_step)
+
+        }
+        else if (globalVitalityGeneral > 4 && globalVitalityGeneral < 10){
+            openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_second_step)
+        }
+        else if (globalVitalityGeneral == 10){
+            openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_powerup)
+        }
+    }
+
 }
+
