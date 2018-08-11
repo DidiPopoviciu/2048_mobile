@@ -68,13 +68,10 @@ class GameActivity() : AppCompatActivity()
     lateinit var gv: GridView
     lateinit var cl: CustomAdapter
 
-        var globalEndyVitality = 0
-
-
+    var globalEndyVitality = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         window.requestFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -82,7 +79,7 @@ class GameActivity() : AppCompatActivity()
         setContentView(R.layout.activity_game)
         supportActionBar?.hide()
 
-        gv = findViewById(R.id.tiles_background) as GridView
+        gv = findViewById<GridView>(R.id.tiles_background)
         cl = CustomAdapter(img, con, name)
         gv.adapter = cl
 
@@ -93,25 +90,17 @@ class GameActivity() : AppCompatActivity()
 
         checkEndyVitality()
 
-//            var endyVitality = gameVitality
-
         vitalityInfo.text = gameVitality.toString()
 
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        var widthScreen = displayMetrics.widthPixels
-        var heightScreen = displayMetrics.heightPixels
-
         textViewsMatrix = initTextViewMatrix()
         startNewGame()
-        Log.warning("papa")
 
         var listener = View.OnTouchListener(function = { view, motionEvent ->
 
             if (gameVitality > 0) {
-
-                Log.warning("if 1")
 
                 if (motionEvent.action == MotionEvent.ACTION_MOVE) {
                     view.y = motionEvent.rawY - view.height
@@ -120,14 +109,10 @@ class GameActivity() : AppCompatActivity()
                     endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_drag)
 
                     endyCollided()
-
                 }
-
                 if (motionEvent.action == MotionEvent.ACTION_UP) {
 
                     if (endyCollided() == false) {
-                        //                        Toast.makeText(this, "if: Not Collided", Toast.LENGTH_SHORT).show()
-
                         val animationEndyX = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f)
                         animationEndyX.duration = 350
                         animationEndyX.setInterpolator(AccelerateDecelerateInterpolator())
@@ -145,10 +130,8 @@ class GameActivity() : AppCompatActivity()
                         }, 350)
 
                         endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
-                    } else {
-                        //                        Toast.makeText(this, "else: Collided", Toast.LENGTH_SHORT).show()
-                        //                        endyVitality--
-
+                    }
+                    else {
                         val animationEndyActivatedX = ObjectAnimator.ofFloat(endyPowerUp, "scaleX", 1.5f, 0f)
                         animationEndyActivatedX.duration = 250
                         animationEndyActivatedX.setInterpolator(AccelerateDecelerateInterpolator())
@@ -193,39 +176,29 @@ class GameActivity() : AppCompatActivity()
                             vitalityInfo.text = gameVitality.toString()
 
                             mypreference.setVItalityCount(gameVitality)
-                        } else {
+                        }
+                        else {
                             gameVitality = 0
 
                             endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_exhausted_background)
 
-
-                            //                            vitalityInfo.text = gameVitality.toString()
-
                             mypreference.setVItalityCount(gameVitality)
                         }
-
                     }
                 }
             }
             else {
-
-                Log.warning("if 2")
-
                 val headShake = ObjectAnimator.ofFloat(endyPowerUp, "translationX", 0f, 15f, -15f, 6f, -6f, 0f)
                 headShake.duration = 500
                 headShake.start()
             }
-
             true
         })
         endyPowerUp.setOnTouchListener(listener)
 
-
         var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_UP) {
-
                 startNewGame()
-
             }
             true
         })
@@ -248,7 +221,6 @@ class GameActivity() : AppCompatActivity()
                         intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
                 )
                 swipeRight(valuesMatrix)
-
             }
             override fun onSwipeUp() {
                 var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
@@ -257,7 +229,6 @@ class GameActivity() : AppCompatActivity()
                         intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
                 )
                 swipeUp(valuesMatrix)
-
             }
             override fun onSwipeDown() {
                 var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
@@ -266,11 +237,9 @@ class GameActivity() : AppCompatActivity()
                         intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
                 )
                 swipeDown(valuesMatrix)
-
             }
         }
         )
-
 
         closeGame.setOnClickListener {
             super.finish()
@@ -286,49 +255,6 @@ class GameActivity() : AppCompatActivity()
                         arrayOf(getTextViewByNumber(12), getTextViewByNumber(13),getTextViewByNumber(14), getTextViewByNumber(15))
         )
     }
-
-    /*override fun onTouchEvent(event: MotionEvent): Boolean {
-
-        var valuesMatrix = arrayOf(intArrayOf(cl.name[0].toInt(), cl.name[1].toInt(), cl.name[2].toInt(), cl.name[3].toInt()),
-                intArrayOf(cl.name[4].toInt(), cl.name[5].toInt(), cl.name[6].toInt(), cl.name[7].toInt()),
-                intArrayOf(cl.name[8].toInt(), cl.name[9].toInt(), cl.name[10].toInt(), cl.name[11].toInt()),
-                intArrayOf(cl.name[12].toInt(), cl.name[13].toInt(), cl.name[14].toInt(), cl.name[15].toInt())
-        )
-        when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
-                x1 = event.x
-                y1 = event.y
-            }
-
-            MotionEvent.ACTION_UP -> {
-                val x2 = event.x
-                val y2 = event.y
-
-                val minDistance = 200
-
-                //if left to right sweep event on screen
-                if (x1 < x2 && x2 - x1 > minDistance) {
-                    swipeRight(valuesMatrix)
-                }
-
-                // if right to left sweep event on screen
-                if (x1 > x2 && x1 - x2 > minDistance) {
-                    swipeLeft(valuesMatrix)
-                }
-
-                // if UP to Down sweep event on screen
-                if (y1 < y2 && y2 - y1 > minDistance) {
-                    swipeDown(valuesMatrix) }
-
-                //if Down to UP sweep event on screen
-                if (y1 > y2 && y1 - y2 > minDistance) {
-                    swipeUp(valuesMatrix)
-                }
-
-            }
-        }
-        return true
-    }*/
 
     private fun generateNewElement() {
         Log.warning("cl: ")
@@ -484,7 +410,6 @@ class GameActivity() : AppCompatActivity()
         }
         Log.info("Number of elements " + numberOfElements.toString())
         if (numberOfElements != 0){
-//                    row is not empty
             for(j in 0 until (numberOfElements))
             {
                 var moved = 0
@@ -510,11 +435,9 @@ class GameActivity() : AppCompatActivity()
             if (element != 0) {
                 numberOfElements +=1
             }
-
         }
         Log.info("Number of elements " + numberOfElements.toString())
         if (numberOfElements >= 2){
-//                    row is not empty
             for(j in 0 until (row.size-1))
             {
                 if (row[j] == row[j+1]) {
@@ -522,37 +445,9 @@ class GameActivity() : AppCompatActivity()
                     row[j] = row[j] + row[j+1]
                     row[j+1] = 0
                 }
-
             }
         }
         return row
-    }
-
-    private fun updateView()
-    {
-        cl.notifyDataSetChanged()
-        gv.adapter = cl
-       /* for(i in valuesMatrix.size-1 downTo  0){
-            for(j in valuesMatrix[i].size-1 downTo 0){
-                if (valuesMatrix[i][j] != buttonsMatrix[i][j].text.toString().toInt()){
-                    if (buttonsMatrix[i][j].text.toString().toInt() == 0){ // and valuesMatrix[i][j] != 0){
-                        buttonsMatrix[i][j].setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
-                    }
-                    else {
-                        if (valuesMatrix[i][j] == 0)
-                        {
-                            buttonsMatrix[i][j].setBackgroundResource(R.drawable.tile_border)
-                        }
-                    }
-                }
-                buttonsMatrix[i][j].text = valuesMatrix[i][j].toString()
-                print("update")
-            }
-        }*/
-    }
-
-    private fun updateAdapterWithVales(){
-
     }
 
     fun checkEndyVitality() {
