@@ -17,7 +17,7 @@
         android:gravity="center"
         android:text="2"
         android:textAlignment="center"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/tile_face"
         app:layout_constraintEnd_toEndOf="parent"

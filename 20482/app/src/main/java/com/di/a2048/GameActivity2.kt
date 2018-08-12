@@ -39,7 +39,7 @@ class GameActivity2 : AppCompatActivity() {
         supportActionBar?.hide()
 
         gv = findViewById(R.id.tiles_background) as GridView
-        cl = CustomAdapter(img, con, name)
+        cl = CustomAdapter(img, con, name, IntArray(0))
         gv.adapter = cl
 
 

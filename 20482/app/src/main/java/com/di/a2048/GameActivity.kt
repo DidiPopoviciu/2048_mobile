@@ -1,20 +1,12 @@
 package com.di.a2048
 
-import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
-import android.animation.TimeInterpolator
 import android.content.Context
-import android.content.Intent
-import android.gesture.Gesture
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Rect
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_game.*
 import android.view.MotionEvent
 import android.view.View
@@ -22,16 +14,11 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import java.util.logging.Logger
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import android.widget.GridLayout
-import com.di.a2048.R.id.message
 import android.util.DisplayMetrics
 import android.widget.GridView
-import java.lang.Math.log
 import kotlinx.android.synthetic.main.custom_grid_tiles.view.*
 
 
@@ -61,6 +48,16 @@ class GameActivity() : AppCompatActivity()
             R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
             R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
             R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey)
+
+    var activeBackground: IntArray = intArrayOf(
+            R.drawable.tile_background, R.drawable.tile_background,
+            R.drawable.tile_background, R.drawable.tile_background,
+            R.drawable.tile_background, R.drawable.tile_background,
+            R.drawable.tile_background, R.drawable.tile_background,
+            R.drawable.tile_background, R.drawable.tile_background,
+            R.drawable.tile_background, R.drawable.tile_background,
+            R.drawable.tile_background, R.drawable.tile_background,
+            R.drawable.tile_background, R.drawable.tile_background)
     var name: Array<String> = arrayOf(  "0", "0", "0", "0",
                                         "0", "0", "0", "0",
                                         "0", "0", "0", "0",
@@ -80,7 +77,7 @@ class GameActivity() : AppCompatActivity()
         supportActionBar?.hide()
 
         gv = findViewById<GridView>(R.id.tiles_background)
-        cl = CustomAdapter(img, con, name)
+        cl = CustomAdapter(img, con, name, activeBackground)
         gv.adapter = cl
 
         val mypreference = MyPreference(this)
@@ -276,6 +273,9 @@ class GameActivity() : AppCompatActivity()
             Log.warning(availableElements[randomIndex].toString())
 
             cl.name[availableElements[randomIndex]] = "2"
+            cl.activeBackground[availableElements[randomIndex]] = R.drawable.active_tile_background
+            cl.img[availableElements[randomIndex]] = R.drawable.ic_tile_faces_01
+
             cl.notifyDataSetChanged()
             gv.adapter = cl
 
@@ -326,6 +326,7 @@ class GameActivity() : AppCompatActivity()
             for (j in 0 until valuesMatrix.size) {
                 cl.name[j * 4 + i] = currentRow[j].toString()
             }
+            updateGrid()
         }
         if (movePerformed > 0) {
             generateNewElement()
@@ -352,6 +353,7 @@ class GameActivity() : AppCompatActivity()
             for (j in 0 until valuesMatrix.size) {
                 cl.name[j * 4 + i] = currentRow[j].toString()
             }
+            updateGrid()
         }
         if (movePerformed > 0) {
             generateNewElement()
@@ -373,6 +375,7 @@ class GameActivity() : AppCompatActivity()
             for(j in 0 until valuesMatrix[0].size) {
                 cl.name[i * 4 + j] = currentRow[j].toString()
             }
+            updateGrid()
         }
         if (movePerformed > 0) {
             generateNewElement()
@@ -394,6 +397,7 @@ class GameActivity() : AppCompatActivity()
             for(j in 0 until valuesMatrix[0].size) {
                 cl.name[i * 4 + j] = currentRow[j].toString()
             }
+            updateGrid()
         }
         if (movePerformed > 0) {
             generateNewElement()
@@ -455,6 +459,87 @@ class GameActivity() : AppCompatActivity()
             endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
         else
             endyPowerUp.background = ContextCompat.getDrawable(this, R.drawable.ic_endy_normal)
+    }
+
+    fun updateGrid(){
+        for (j in 0 until (cl.name.size)) {
+            when (cl.name[j].toInt()) {
+                0 -> {
+                    cl.activeBackground[j] = R.drawable.tile_background
+                    cl.img[j] = R.drawable.ic_ic_face_grey
+                }
+                2 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_01
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                4 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_02
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                8 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_03
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                16 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_04
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                32-> {
+                    cl.img[j] = R.drawable.ic_tile_faces_05
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                64 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_06
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                128 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_07
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                256 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_08
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                512 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_09
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                1024 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_10
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                2048 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_11
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                4096 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_12
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                8192 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_13
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                16384 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_14
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                32768 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_15
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                65536 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_16
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+                131072 -> {
+                    cl.img[j] = R.drawable.ic_tile_faces_17
+                    cl.activeBackground[j] = R.drawable.active_tile_background
+                }
+            }
+            cl.notifyDataSetChanged()
+            gv.adapter = cl
+        }
     }
 }
 

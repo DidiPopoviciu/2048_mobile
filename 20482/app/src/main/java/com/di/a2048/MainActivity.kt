@@ -119,13 +119,21 @@ class MainActivity : AppCompatActivity() {
 
             mypreference.setVItalityCount(countVitality)
 
-            addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_add_vitality)
+            addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality)
         }
             true })
 
         textV.setOnTouchListener(resetVitality)
 
         var listenerAddVitality = View.OnTouchListener(function = { view, motionEvent -> if(motionEvent.action == MotionEvent.ACTION_UP) {
+
+            val addVitalityAnimationX = ObjectAnimator.ofFloat(addVitality, "scaleX", 1f, 0.8f, 1f)
+            addVitalityAnimationX.duration = 200
+            addVitalityAnimationX.start()
+
+            val addVitalityAnimationY = ObjectAnimator.ofFloat(addVitality, "scaleY", 1f, 0.8f, 1f)
+            addVitalityAnimationY.duration = 200
+            addVitalityAnimationY.start()
 
             when (globalVitalityGeneral) {
                 in 0..3 -> {
@@ -250,7 +258,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     else {endyMessage.visibility = View.INVISIBLE}
                     openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_max)
-                    addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality_inactive)
+                    addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality_unavailable)
 
                     Handler().postDelayed({
                         endyMessage.visibility = View.INVISIBLE
@@ -304,17 +312,21 @@ class MainActivity : AppCompatActivity() {
     fun checkVitality(){
         if (globalVitalityGeneral == 0){
             openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_exhausted)
+            addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality)
 
         }
         else if (globalVitalityGeneral > 0 && globalVitalityGeneral < 5){
             openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_first_step)
+            addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality)
 
         }
         else if (globalVitalityGeneral > 4 && globalVitalityGeneral < 10){
             openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_second_step)
+            addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality)
         }
         else if (globalVitalityGeneral == 10){
             openDialog.background = ContextCompat.getDrawable(this, R.drawable.ic_ic_endy_powerup)
+            addVitality.background = ContextCompat.getDrawable(this, R.drawable.ic_add_vitality_unavailable)
         }
     }
 
