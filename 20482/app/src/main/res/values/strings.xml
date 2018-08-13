@@ -10,4 +10,12 @@
     <string name="currentScoreNumber">2048</string>
     <string name="currentScoreTitle">Current Score</string>
     <string name="maximumVitality">Endy has all the energy in the world!</string>
+    <string name="restartGameTitle">Restart game?</string>
+    <string name="restartGameDescription">Are you sure you want to restart the game? You will lose all the progress.</string>
+    <string name="restartGameTrue">Restart Game</string>
+    <string name="restartGameSkip">Continue playing</string>
+    <string name="fullVitalityTitle">Endy\'s vitality is fully restored!</string>
+    <string name="fullVitalityDescription">You cannot give Endy more vitality. You can only add more vitality if you use Endy at leas once.</string>
+    <string name="fullVitalityTrue">Vitality Full</string>
+    <string name="fullVitalitySkip">Go to home screen</string>
 </resources>

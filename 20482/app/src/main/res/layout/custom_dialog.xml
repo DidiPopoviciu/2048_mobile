@@ -9,11 +9,10 @@
 
     <ImageView
         android:id="@+id/vitalityDialog"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="46dp"
@@ -25,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
-        app:srcCompat="@drawable/ic_ic_endy_happy" />
+        app:srcCompat="@drawable/ic_endy_sad" />
 
     <TextView
         android:id="@+id/textView"
@@ -35,7 +34,7 @@
         android:layout_alignStart="@+id/vitalityDialog"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/VitalityTitle"
         android:textAlignment="textStart"
@@ -58,7 +57,7 @@
         android:fontFamily="@font/montserrat"
         android:text="@string/vitalityExplanation"
         android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/restoreVitality"
+        app:layout_constraintBottom_toTopOf="@+id/restartGameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -88,10 +87,10 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:elevation="0dp"
         android:fontFamily="@font/montserrat"

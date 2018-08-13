@@ -48,7 +48,7 @@ class CustomAdapter : BaseAdapter {
     }
 
     override fun getItem(p0: Int): Any? {
-        return null
+        return p0
     }
 
     override fun getItemId(p0: Int): Long {

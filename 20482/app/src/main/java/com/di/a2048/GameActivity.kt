@@ -7,19 +7,28 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_game.*
-import android.view.MotionEvent
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import java.util.*
 import java.util.logging.Logger
 import android.view.animation.DecelerateInterpolator
 import android.util.DisplayMetrics
+import android.view.*
+import android.view.animation.AnimationUtils
 import android.widget.GridView
 import kotlinx.android.synthetic.main.custom_grid_tiles.view.*
+import kotlinx.android.synthetic.main.custom_dialog.view.*
+import kotlinx.android.synthetic.main.restart_game_dialog.view.*
+import android.view.animation.LayoutAnimationController
+import android.view.animation.LinearInterpolator
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
+
+
+
+
 
 
 class GameActivity() : AppCompatActivity()
@@ -94,6 +103,29 @@ class GameActivity() : AppCompatActivity()
 
         textViewsMatrix = initTextViewMatrix()
         startNewGame()
+
+        restartGame.setOnClickListener{
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.restart_game_dialog, null)
+
+            val mBuilder = AlertDialog.Builder(this)
+                    .setView(mDialogView)
+
+            val mAlertDialog = mBuilder.show()
+
+            mDialogView.restartGameButton.setOnClickListener{
+                val resId = R.anim.layout_animation_fall_down
+                val animation = AnimationUtils.loadLayoutAnimation(this, resId)
+                gv.setLayoutAnimation(animation)
+                startNewGame()
+                mAlertDialog.dismiss()
+            }
+
+            mDialogView.continuePlaying.setOnClickListener{
+
+                mAlertDialog.dismiss()
+            }
+
+        }
 
         var listener = View.OnTouchListener(function = { view, motionEvent ->
 
@@ -193,13 +225,13 @@ class GameActivity() : AppCompatActivity()
         })
         endyPowerUp.setOnTouchListener(listener)
 
-        var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
+/*        var returnEndy = View.OnTouchListener(function = { view, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_UP) {
                 startNewGame()
             }
             true
         })
-        restartGame.setOnTouchListener(returnEndy)
+        restartGame.setOnTouchListener(returnEndy)*/
 
         gv.setOnTouchListener(object: OnSwipeTouchListener(this) {
 
@@ -278,7 +310,6 @@ class GameActivity() : AppCompatActivity()
 
             cl.notifyDataSetChanged()
             gv.adapter = cl
-
         }
     }
 
@@ -296,8 +327,45 @@ class GameActivity() : AppCompatActivity()
         return (cl.getView(1, tiles_background, null).element_skin.tile_number_background.text).toString().toInt()
     }
     private fun startNewGame(){
+        initGridView()
+
         generateNewElement()
         generateNewElement()
+    }
+
+    fun initGridView(){
+        var con: Context = this
+        var img: IntArray = intArrayOf(
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey,
+                R.drawable.ic_ic_face_grey, R.drawable.ic_ic_face_grey)
+
+        var activeBackground: IntArray = intArrayOf(
+                R.drawable.tile_background, R.drawable.tile_background,
+                R.drawable.tile_background, R.drawable.tile_background,
+                R.drawable.tile_background, R.drawable.tile_background,
+                R.drawable.tile_background, R.drawable.tile_background,
+                R.drawable.tile_background, R.drawable.tile_background,
+                R.drawable.tile_background, R.drawable.tile_background,
+                R.drawable.tile_background, R.drawable.tile_background,
+                R.drawable.tile_background, R.drawable.tile_background)
+        var name: Array<String> = arrayOf(  "0", "0", "0", "0",
+                "0", "0", "0", "0",
+                "0", "0", "0", "0",
+                "0", "0", "0", "0")
+
+        cl.name = name
+        cl.con = con
+        cl.img = img
+        cl.activeBackground = activeBackground
+
+        cl.notifyDataSetChanged()
+        gv.adapter = cl
     }
 
     fun endyCollided(): Boolean {
@@ -309,6 +377,11 @@ class GameActivity() : AppCompatActivity()
     }
 
     private fun swipeUp(valuesMatrix : Array<IntArray>){
+        val animation = ObjectAnimator.ofFloat(gv, "translationY", 0f, -20f, 0f)
+        animation.duration = 200
+        animation.setInterpolator(DecelerateInterpolator())
+        animation.start()
+
         movePerformed = 0
         var currentRow = intArrayOf(0,0,0,0)
         for (i in 0 until valuesMatrix.size) {
@@ -334,6 +407,11 @@ class GameActivity() : AppCompatActivity()
     }
 
     private fun swipeDown(valuesMatrix : Array<IntArray>){
+        val animation = ObjectAnimator.ofFloat(gv, "translationY", 0f, 20f, 0f)
+        animation.duration = 200
+        animation.setInterpolator(AccelerateDecelerateInterpolator())
+        animation.start()
+
         movePerformed = 0
         var currentRow = intArrayOf(0,0,0,0)
         for (i in 0 until valuesMatrix.size) {
@@ -361,6 +439,10 @@ class GameActivity() : AppCompatActivity()
     }
 
     private fun swipeRight(valuesMatrix : Array<IntArray>){
+            val animation = ObjectAnimator.ofFloat(gv, "translationX", 0f, -20f, 0f)
+            animation.duration = 200
+            animation.setInterpolator(AccelerateDecelerateInterpolator())
+            animation.start()
 
         var currentRow = intArrayOf(0,0,0,0)
         for (i in 0 until valuesMatrix.size) {
@@ -383,6 +465,12 @@ class GameActivity() : AppCompatActivity()
     }
 
     private fun swipeLeft(valuesMatrix : Array<IntArray>){
+
+        val animation = ObjectAnimator.ofFloat(gv, "translationX", 0f, 20f, 0f)
+        animation.duration = 200
+        animation.setInterpolator(AccelerateDecelerateInterpolator())
+        animation.start()
+
         movePerformed = 0
 
         var currentRow = intArrayOf(0,0,0,0)
@@ -463,6 +551,7 @@ class GameActivity() : AppCompatActivity()
 
     fun updateGrid(){
         for (j in 0 until (cl.name.size)) {
+
             when (cl.name[j].toInt()) {
                 0 -> {
                     cl.activeBackground[j] = R.drawable.tile_background
@@ -541,6 +630,8 @@ class GameActivity() : AppCompatActivity()
             gv.adapter = cl
         }
     }
+
+
 }
 
 

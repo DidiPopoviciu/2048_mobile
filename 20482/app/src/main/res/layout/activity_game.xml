@@ -98,24 +98,26 @@
         app:layout_constraintTop_toBottomOf="@+id/tiles_background"
         app:layout_constraintVertical_bias="0.0" />
 
- <GridView
-     android:id="@+id/tiles_background"
-     android:layout_width="fill_parent"
-     android:layout_height="wrap_content"
-     android:layout_marginBottom="8dp"
-     android:layout_marginEnd="24dp"
-     android:layout_marginStart="24dp"
-     android:layout_marginTop="8dp"
-     android:columnWidth="90dp"
-     android:contentDescription="Number Tiles"
-     android:gravity="center"
-     android:numColumns="4"
-     android:stretchMode="columnWidth"
-     app:layout_constraintBottom_toBottomOf="parent"
-     app:layout_constraintEnd_toEndOf="parent"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/currentScoreTitle"
-     app:layout_constraintVertical_bias="0.39"></GridView>
+    <GridView
+        android:id="@+id/tiles_background"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:animateLayoutChanges="false"
+        android:columnWidth="90dp"
+        android:contentDescription="Number Tiles"
+        android:gravity="center"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentScoreTitle"
+        app:layout_constraintVertical_bias="0.39"></GridView>
 
     <!--<GridLayout
         android:id="@+id/gridLayout"

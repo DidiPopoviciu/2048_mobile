@@ -1,7 +1,6 @@
 package com.di.a2048
 
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,10 +9,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.util.DisplayMetrics
 import android.view.*
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 
@@ -89,19 +84,38 @@ class MainActivity : AppCompatActivity() {
 
 
         openDialog.setOnClickListener{
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
+            if (globalVitalityGeneral < 10)
+            {
+                val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
 
-            val mBuilder = AlertDialog.Builder(this)
-                    .setView(mDialogView)
+                val mBuilder = AlertDialog.Builder(this)
+                        .setView(mDialogView)
 
-            val mAlertDialog = mBuilder.show()
+                val mAlertDialog = mBuilder.show()
 
-            mDialogView.restoreVitality.setOnClickListener{
-                mAlertDialog.dismiss()
+                mDialogView.restoreVitality.setOnClickListener{
+                    mAlertDialog.dismiss()
+                }
+
+                mDialogView.skipVitality.setOnClickListener{
+                    mAlertDialog.dismiss()
+                }
             }
+            else {
+                val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_full_vitality, null)
 
-            mDialogView.skipVitality.setOnClickListener{
-                mAlertDialog.dismiss()
+                val mBuilder = AlertDialog.Builder(this)
+                        .setView(mDialogView)
+
+                val mAlertDialog = mBuilder.show()
+
+                mDialogView.restoreVitality.setOnClickListener{
+
+                }
+
+                mDialogView.skipVitality.setOnClickListener{
+                    mAlertDialog.dismiss()
+                }
             }
 
         }
